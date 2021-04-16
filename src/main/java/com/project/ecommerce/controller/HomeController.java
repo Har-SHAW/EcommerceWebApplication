@@ -26,8 +26,6 @@ public class HomeController {
         return "log-in";
     }
 
-
-
     @RequestMapping("/adminDashboard")
     public String getAdminDashboard(){
         return "admin-dashboard";

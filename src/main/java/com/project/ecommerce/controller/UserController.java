@@ -5,12 +5,16 @@ import com.project.ecommerce.dto.OrderItem;
 import com.project.ecommerce.entity.item.ItemEntity;
 import com.project.ecommerce.entity.order.OrderEntity;
 import com.project.ecommerce.entity.order.OrderItemEntity;
+import com.project.ecommerce.entity.user.UserEntity;
 import com.project.ecommerce.model.CartModel;
 import com.project.ecommerce.repository.ItemRepository;
 import com.project.ecommerce.repository.OrderItemRepository;
 import com.project.ecommerce.repository.OrderRepository;
+import com.project.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -39,7 +43,7 @@ public class UserController {
     OrderRepository orderRepository;
 
     @Autowired
-    OrderItemRepository orderItemRepository;
+    UserRepository userRepository;
 
     public List<Item> getItemsList(){
         List<ItemEntity> itemEntities = itemRepository.findAll();
@@ -80,6 +84,19 @@ public class UserController {
 
             orderEntity.addOrderItem(orderItemEntity);
         }
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        UserEntity userEntity = userRepository.findById(username).orElse(null);
+
+        orderEntity.setUserEntity(userEntity);
 
         orderRepository.save(orderEntity);
 

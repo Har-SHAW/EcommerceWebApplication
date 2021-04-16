@@ -1,5 +1,6 @@
 package com.project.ecommerce.entity.order;
 
+import com.project.ecommerce.entity.user.UserEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import java.util.List;
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Long orderId;
 
     @Column(columnDefinition = "TIMESTAMP")
@@ -24,6 +26,10 @@ public class OrderEntity {
 
     @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL)
     private List<OrderItemEntity> orderItemEntities;
+
+    @ManyToOne
+    @JoinColumn(name = "username")
+    private UserEntity userEntity;
 
     public void addOrderItem(OrderItemEntity orderItemEntity){
         if (this.orderItemEntities == null){

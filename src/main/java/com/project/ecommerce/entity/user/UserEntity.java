@@ -1,5 +1,6 @@
 package com.project.ecommerce.entity.user;
 
+import com.project.ecommerce.entity.order.OrderEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,9 @@ public class UserEntity {
     @OneToOne
     @JoinColumn(name = "user_details_id")
     protected UserDetailsEntity userDetailsEntity;
+
+    @OneToMany(mappedBy = "userEntity")
+    private List<OrderEntity> orderEntities;
 
     @ManyToMany(cascade = {
             CascadeType.DETACH,
