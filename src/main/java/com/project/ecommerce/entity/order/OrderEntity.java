@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,14 @@ public class OrderEntity {
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime orderDate;
 
-    @OneToMany
-    @JoinColumn(name = "order_entity_id")
+    @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL)
     private List<OrderItemEntity> orderItemEntities;
+
+    public void addOrderItem(OrderItemEntity orderItemEntity){
+        if (this.orderItemEntities == null){
+            this.orderItemEntities = new ArrayList<>();
+        }
+
+        this.orderItemEntities.add(orderItemEntity);
+    }
 }

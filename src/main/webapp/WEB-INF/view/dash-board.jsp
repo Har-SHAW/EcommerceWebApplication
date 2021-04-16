@@ -6,7 +6,9 @@
 u have user rights
 
 <c:forEach var="item" items="${items}">
-    <div>${item.itemName}  ${item.itemPrice}  <form:form action="addItem?itemId=${item.itemId}"><input type="submit" value="add"/></form:form> </div>
+    <div>${item.itemName}  ${item.itemPrice}
+    <a href="addItem?itemId=${item.itemId}">addItem</a>
+    </div>
     <br>
 </c:forEach>
 <br>
@@ -14,8 +16,15 @@ u have user rights
 Cart:
 <br>
 <c:forEach var="item" items="${cart.orderItems}">
-    <div>${item.item.itemName}  ${item.item.itemPrice}  ${item.quantity}</div>
+    <div>${item.item.itemName}  ${item.item.itemPrice}  ${item.quantity}
+    <a href="incrItem?itemId=${item.item.itemId}">+</a>
+    <a href="decrItem?itemId=${item.item.itemId}">-</a>
+    <a href="deleteItem?itemId=${item.item.itemId}">delete</a>
+    </div>
     <br>
 </c:forEach>
+<br>
+<br>
+<a href="placeOrder">place order</a>
 </body>
 </html>
