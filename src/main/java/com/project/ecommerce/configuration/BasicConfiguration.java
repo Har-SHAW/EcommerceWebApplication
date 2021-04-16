@@ -1,6 +1,5 @@
 package com.project.ecommerce.configuration;
 
-import com.project.ecommerce.model.CartModel;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

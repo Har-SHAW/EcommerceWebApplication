@@ -8,7 +8,6 @@ import com.project.ecommerce.entity.order.OrderItemEntity;
 import com.project.ecommerce.entity.user.UserEntity;
 import com.project.ecommerce.model.CartModel;
 import com.project.ecommerce.repository.ItemRepository;
-import com.project.ecommerce.repository.OrderItemRepository;
 import com.project.ecommerce.repository.OrderRepository;
 import com.project.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
