@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
-@Table(name = "roles", uniqueConstraints = @UniqueConstraint(columnNames = "role"))
+@Table(name = "roles")
 public class RolesEntity {
     @Id
     private String role;

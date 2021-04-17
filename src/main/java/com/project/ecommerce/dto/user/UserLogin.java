@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class UserLogin {
     @NotNull(message = "username is required")
     @Size(min = 4, message = "at least 4 characters")
     private String username;

@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,6 +39,25 @@ public class AuthController {
     @Autowired
     PasswordEncoder encoder;
 
+    public void registerTheUser(UserSignup theUser){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setPassword(encoder.encode(theUser.getPassword()));
+        userEntity.setUsername(theUser.getUsername());
+
+        UserDetailsEntity userDetailsEntity = new UserDetailsEntity();
+        userDetailsEntity.setAge(theUser.getAge());
+        userDetailsEntity.setEmail(theUser.getEmail());
+        userDetailsEntity.setPhoneNo(theUser.getPhoneNo());
+
+        userEntity.setUserDetailsEntity(userDetailsEntity);
+
+        RolesEntity rolesEntity = roleRepository.getOne("ROLE_USER");
+
+        userEntity.addRole(rolesEntity);
+
+        userRepository.save(userEntity);
+    }
+
     @RequestMapping("/signup")
     public String registerUser(Model model){
         model.addAttribute("user", new UserSignup());
@@ -54,29 +72,13 @@ public class AuthController {
         }
 
         if (bindingResult.hasErrors()){
-            System.out.println(bindingResult);
             return "sign-up";
         }else {
             if(userRepository.existsById(theUser.getUsername())) {
                 return "error-page";
             }
 
-            UserEntity userEntity = new UserEntity();
-            userEntity.setPassword(encoder.encode(theUser.getPassword()));
-            userEntity.setUsername(theUser.getUsername());
-
-            UserDetailsEntity userDetailsEntity = new UserDetailsEntity();
-            userDetailsEntity.setAge(theUser.getAge());
-            userDetailsEntity.setEmail(theUser.getEmail());
-            userDetailsEntity.setPhoneNo(theUser.getPhoneNo());
-
-            userEntity.setUserDetailsEntity(userDetailsEntity);
-
-            RolesEntity rolesEntity = roleRepository.getOne("ROLE_USER");
-
-            userEntity.addRole(rolesEntity);
-
-            userRepository.save(userEntity);
+            registerTheUser(theUser);
 
             return "log-in";
         }

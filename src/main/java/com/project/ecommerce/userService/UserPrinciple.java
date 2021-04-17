@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -26,7 +27,7 @@ public class UserPrinciple extends UserEntity implements UserDetails {
     public static UserPrinciple build(UserEntity user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        List<RolesEntity> rolesEntities = user.getRolesEntities();
+        Set<RolesEntity> rolesEntities = user.getRolesEntities();
         for (RolesEntity rolesEntity : rolesEntities){
             authorities.add(new SimpleGrantedAuthority(rolesEntity.getRole()));
         }

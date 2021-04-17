@@ -30,4 +30,9 @@ public class HomeController {
     public String getAdminDashboard(){
         return "admin-dashboard";
     }
+
+    @RequestMapping("/managerDashboard")
+    public String getManagerDashboard(){
+        return "manager-dashboard";
+    }
 }

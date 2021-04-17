@@ -6,8 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -38,11 +39,11 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "username"),
             inverseJoinColumns = @JoinColumn(name = "role")
     )
-    protected List<RolesEntity> rolesEntities;
+    protected Set<RolesEntity> rolesEntities;
 
     public void addRole(RolesEntity rolesEntity){
         if (rolesEntities == null){
-            this.rolesEntities = new ArrayList<>();
+            this.rolesEntities = new HashSet<>();
         }
         this.rolesEntities.add(rolesEntity);
     }

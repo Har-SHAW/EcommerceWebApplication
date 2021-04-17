@@ -18,7 +18,6 @@ import java.util.List;
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
     private Long orderId;
 
     @Column(columnDefinition = "TIMESTAMP")
