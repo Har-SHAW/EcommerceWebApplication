@@ -20,7 +20,7 @@ public class UserEntity {
 
     protected String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id")
     protected UserDetailsEntity userDetailsEntity;
 

@@ -12,7 +12,7 @@ public class Item {
     @NonNull private String itemName;
     @NonNull private Double itemPrice;
 
-    public void copyFromEntity(ItemEntity itemEntity){
+    public Item(ItemEntity itemEntity){
         this.setItemId(itemEntity.getItemId());
         this.setItemName(itemEntity.getItemName());
         this.setItemPrice(itemEntity.getItemPrice());

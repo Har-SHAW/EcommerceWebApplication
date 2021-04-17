@@ -142,14 +142,26 @@ input {
         <br>
         <br>
         <form:form action="processSignup" modelAttribute="user" cssClass="formStyle">
-        <form:input path="username" placeholder="First Name" cssClass="inputStyle" autocomplete="off"/>
+        <form:input path="username" placeholder="Username" cssClass="inputStyle" autocomplete="off"/>
         <form:errors path="username" cssClass="error" />
         <br>
-        <form:input path="password" placeholder="Last Name" cssClass="inputStyle" autocomplete="off"/>
+        <form:input path="password" type="password" placeholder="Password" cssClass="inputStyle" autocomplete="off"/>
         <form:errors path="password" cssClass="error" />
         <br>
+        <form:input path="confirmPassword" type="password" placeholder="Confirm Password" cssClass="inputStyle" autocomplete="off"/>
+        <form:errors path="confirmPassword" cssClass="error" />
         <br>
-                <input type="submit" class="inputButton"/>
+        <form:input path="age" placeholder="Age" cssClass="inputStyle" autocomplete="off"/>
+        <form:errors path="age" cssClass="error" />
+        <br>
+        <form:input path="email" placeholder="Email" cssClass="inputStyle" autocomplete="off"/>
+        <form:errors path="email" cssClass="error" />
+        <br>
+        <form:input path="phoneNo" placeholder="Phone Number" cssClass="inputStyle" autocomplete="off"/>
+        <form:errors path="phoneNo" cssClass="error" />
+        <br>
+        <br>
+        <input type="submit" class="inputButton"/>
         </form:form>
         <br>
         <br>

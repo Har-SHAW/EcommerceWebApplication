@@ -156,6 +156,7 @@ input {
                 </c:if>
         </form:form>
         <br>
+        <a href="signup">New? Signup</a>
         <br>
         </div>
     </div>

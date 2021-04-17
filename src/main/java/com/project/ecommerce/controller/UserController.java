@@ -1,6 +1,7 @@
 package com.project.ecommerce.controller;
 
 import com.project.ecommerce.dto.Item;
+import com.project.ecommerce.dto.Order;
 import com.project.ecommerce.dto.OrderItem;
 import com.project.ecommerce.entity.item.ItemEntity;
 import com.project.ecommerce.entity.order.OrderEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,10 +56,27 @@ public class UserController {
         return items;
     }
 
+    public String getUsernameFromAuth(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        return username;
+    }
+
     @RequestMapping("/dashboard")
     public String getDashBoard(Model model,HttpServletRequest request){
-        request.getSession().setAttribute("cart", new CartModel());
-        model.addAttribute("cart", new CartModel());
+        if (request.getSession().getAttribute("cart") == null){
+            request.getSession().setAttribute("cart", new CartModel());
+            model.addAttribute("cart", new CartModel());
+        }else {
+            model.addAttribute("cart", request.getSession().getAttribute("cart"));
+        }
 
         model.addAttribute("items", getItemsList());
 
@@ -68,6 +87,11 @@ public class UserController {
     public String placeOrder(Model model,HttpServletRequest request){
 
         CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
+
+        if (cartModel.getOrderItems().isEmpty()){
+            model.addAttribute("items", getItemsList());
+            return "dash-board";
+        }
 
         OrderEntity orderEntity = new OrderEntity();
 
@@ -83,21 +107,37 @@ public class UserController {
             orderEntity.addOrderItem(orderItemEntity);
         }
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
-        UserEntity userEntity = userRepository.findById(username).orElse(null);
+        UserEntity userEntity = userRepository.findById(getUsernameFromAuth()).orElse(null);
 
         orderEntity.setUserEntity(userEntity);
+
+        orderEntity.setOrderDate(LocalDateTime.now());
 
         orderRepository.save(orderEntity);
 
         return "success-order";
+    }
+
+    @RequestMapping("/showOrders")
+    public String showOrders(Model model, HttpServletRequest request){
+        UserEntity userEntity = userRepository.findById(getUsernameFromAuth()).orElse(null);
+        assert userEntity != null;
+
+        List<OrderEntity> orderEntities = userEntity.getOrderEntities();
+
+        List<Order> orders = new ArrayList<>();
+
+        for (OrderEntity orderEntity : orderEntities){
+            orders.add(new Order(orderEntity));
+        }
+
+        model.addAttribute("orders", orders);
+        return "user-orders";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(){
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return "log-in";
     }
 }

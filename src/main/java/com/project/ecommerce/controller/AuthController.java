@@ -1,7 +1,9 @@
 package com.project.ecommerce.controller;
 
 import com.project.ecommerce.dto.User;
+import com.project.ecommerce.dto.UserSignup;
 import com.project.ecommerce.entity.user.RolesEntity;
+import com.project.ecommerce.entity.user.UserDetailsEntity;
 import com.project.ecommerce.entity.user.UserEntity;
 import com.project.ecommerce.repository.RoleRepository;
 import com.project.ecommerce.repository.UserRepository;
@@ -40,12 +42,12 @@ public class AuthController {
 
     @RequestMapping("/signup")
     public String registerUser(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserSignup());
         return "sign-up";
     }
 
     @PostMapping("/processSignup")
-    public String processSignUp(@Valid @ModelAttribute("user") User theUser, BindingResult bindingResult, Model model){
+    public String processSignUp(@Valid @ModelAttribute("user") UserSignup theUser, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
             return "sign-up";
         }else {
@@ -56,6 +58,13 @@ public class AuthController {
             UserEntity userEntity = new UserEntity();
             userEntity.setPassword(encoder.encode(theUser.getPassword()));
             userEntity.setUsername(theUser.getUsername());
+
+            UserDetailsEntity userDetailsEntity = new UserDetailsEntity();
+            userDetailsEntity.setAge(theUser.getAge());
+            userDetailsEntity.setEmail(theUser.getEmail());
+            userDetailsEntity.setPhoneNo(theUser.getPhoneNo());
+
+            userEntity.setUserDetailsEntity(userDetailsEntity);
 
             RolesEntity rolesEntity = roleRepository.getOne("ROLE_USER");
 

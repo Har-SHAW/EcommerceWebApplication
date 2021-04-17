@@ -19,7 +19,6 @@ import java.util.List;
 @RequestMapping("/")
 public class CartController {
 
-
     @Autowired
     ItemRepository itemRepository;
 
@@ -58,8 +57,7 @@ public class CartController {
         }
 
         ItemEntity itemEntity = itemRepository.getOne(Long.parseLong(itemId));
-        Item item = new Item();
-        item.copyFromEntity(itemEntity);
+        Item item = new Item(itemEntity);
 
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
@@ -71,7 +69,7 @@ public class CartController {
         return "dash-board";
     }
 
-    @RequestMapping("/incrItem")
+    @RequestMapping("/incrementItem")
     public String incrementItem(@RequestParam(name = "itemId") String itemId,
                                 Model model,
                                 HttpServletRequest request){
@@ -80,7 +78,8 @@ public class CartController {
 
         OrderItem orderItem = findOrderItem(cartModel.getOrderItems(), itemIdLong);
 
-        orderItem.setQuantity(orderItem.getQuantity()+1);
+        orderItem.setQuantity(orderItem.getQuantity() + 1);
+        cartModel.setTotalPrice(cartModel.getTotalPrice() + orderItem.getItem().getItemPrice());
 
         model.addAttribute("cart", cartModel);
         model.addAttribute("items", getItemsList());
@@ -88,7 +87,7 @@ public class CartController {
         return "dash-board";
     }
 
-    @RequestMapping("/decrItem")
+    @RequestMapping("/decrementItem")
     public String decrementItem(@RequestParam(name = "itemId") String itemId,
                                 Model model,
                                 HttpServletRequest request){
@@ -99,6 +98,7 @@ public class CartController {
 
         if (orderItem.getQuantity() > 1) {
             orderItem.setQuantity(orderItem.getQuantity() - 1);
+            cartModel.setTotalPrice(cartModel.getTotalPrice() - orderItem.getItem().getItemPrice());
         }
 
         model.addAttribute("cart", cartModel);
@@ -116,7 +116,7 @@ public class CartController {
 
         OrderItem orderItem = findOrderItem(cartModel.getOrderItems(), itemIdLong);
 
-        cartModel.getOrderItems().remove(orderItem);
+        cartModel.removeItem(orderItem);
 
         model.addAttribute("cart", cartModel);
         model.addAttribute("items", getItemsList());
