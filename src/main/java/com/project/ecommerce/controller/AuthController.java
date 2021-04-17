@@ -54,6 +54,7 @@ public class AuthController {
         }
 
         if (bindingResult.hasErrors()){
+            System.out.println(bindingResult);
             return "sign-up";
         }else {
             if(userRepository.existsById(theUser.getUsername())) {
