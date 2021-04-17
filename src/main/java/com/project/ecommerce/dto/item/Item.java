@@ -1,4 +1,4 @@
-package com.project.ecommerce.dto;
+package com.project.ecommerce.dto.item;
 
 import com.project.ecommerce.entity.item.ItemEntity;
 import lombok.*;

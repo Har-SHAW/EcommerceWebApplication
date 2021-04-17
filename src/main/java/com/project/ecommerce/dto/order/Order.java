@@ -1,4 +1,4 @@
-package com.project.ecommerce.dto;
+package com.project.ecommerce.dto.order;
 
 import com.project.ecommerce.entity.order.OrderEntity;
 import com.project.ecommerce.entity.order.OrderItemEntity;

@@ -1,6 +1,6 @@
 package com.project.ecommerce.model;
 
-import com.project.ecommerce.dto.OrderItem;
+import com.project.ecommerce.dto.order.OrderItem;
 import lombok.Getter;
 import lombok.Setter;
 

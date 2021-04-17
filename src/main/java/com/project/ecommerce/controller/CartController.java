@@ -1,7 +1,7 @@
 package com.project.ecommerce.controller;
 
-import com.project.ecommerce.dto.Item;
-import com.project.ecommerce.dto.OrderItem;
+import com.project.ecommerce.dto.item.Item;
+import com.project.ecommerce.dto.order.OrderItem;
 import com.project.ecommerce.entity.item.ItemEntity;
 import com.project.ecommerce.model.CartModel;
 import com.project.ecommerce.repository.ItemRepository;

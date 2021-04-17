@@ -1,4 +1,4 @@
-package com.project.ecommerce.dto;
+package com.project.ecommerce.dto.user;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

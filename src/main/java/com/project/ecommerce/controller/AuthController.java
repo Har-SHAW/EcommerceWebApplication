@@ -1,7 +1,6 @@
 package com.project.ecommerce.controller;
 
-import com.project.ecommerce.dto.User;
-import com.project.ecommerce.dto.UserSignup;
+import com.project.ecommerce.dto.user.UserSignup;
 import com.project.ecommerce.entity.user.RolesEntity;
 import com.project.ecommerce.entity.user.UserDetailsEntity;
 import com.project.ecommerce.entity.user.UserEntity;
@@ -13,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,6 +48,11 @@ public class AuthController {
 
     @PostMapping("/processSignup")
     public String processSignUp(@Valid @ModelAttribute("user") UserSignup theUser, BindingResult bindingResult, Model model){
+
+        if (theUser.getConfirmPassword()!=null && !theUser.getPassword().equals(theUser.getConfirmPassword())){
+            bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "Password not matched");
+        }
+
         if (bindingResult.hasErrors()){
             return "sign-up";
         }else {

@@ -1,4 +1,4 @@
-package com.project.ecommerce.dto;
+package com.project.ecommerce.dto.user;
 
 import com.project.ecommerce.validation.OnlyGMail;
 import com.project.ecommerce.validation.UniqueUsername;
@@ -22,7 +22,6 @@ public class UserSignup {
     private String password;
 
     @NotNull(message = "is required")
-    @Size(min = 6, message = "Minimum 6 characters")
     private String confirmPassword;
 
     @NotNull(message = "is required")
