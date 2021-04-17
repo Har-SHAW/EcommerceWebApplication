@@ -1,8 +1,6 @@
 <html>
 <body>
 <div>u have admin rights</div>
-
-
 <br>
 <br>
 <a href="adminDashboard/showUsers">show users</a>

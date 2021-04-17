@@ -37,4 +37,6 @@ public class OrderEntity {
 
         this.orderItemEntities.add(orderItemEntity);
     }
+
+    private String status;
 }

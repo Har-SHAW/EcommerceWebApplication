@@ -37,12 +37,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/dashboard/**").hasAuthority("ROLE_USER")
                 .antMatchers("/adminDashboard/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/managerDashboard/**").hasAuthority("ROLE_MANAGER")
+                .antMatchers("/employeeDashboard/**").hasAuthority(("ROLE_EMPLOYEE"))
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/loginPage")
                 .loginProcessingUrl("/processLogin")
-                .permitAll();
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied");
     }
 }

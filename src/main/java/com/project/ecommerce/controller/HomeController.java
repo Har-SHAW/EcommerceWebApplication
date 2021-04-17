@@ -35,4 +35,12 @@ public class HomeController {
     public String getManagerDashboard(){
         return "manager-dashboard";
     }
+
+    @RequestMapping("/employeeDashboard")
+    public String getEmployeeDashboard(){ return "employee-dashboard"; }
+
+    @RequestMapping("/access-denied")
+    public String getAccessDenied(){
+        return "access-denied";
+    }
 }
