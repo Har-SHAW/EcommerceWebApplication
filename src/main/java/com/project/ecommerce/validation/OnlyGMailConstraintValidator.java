@@ -14,7 +14,6 @@ public class OnlyGMailConstraintValidator implements ConstraintValidator<OnlyGMa
 
 	@Override
 	public boolean isValid(String code, ConstraintValidatorContext context) {
-		// TODO Auto-generated method stub
 		if(code == null)
 			return true;
 		return code.endsWith(suffix);

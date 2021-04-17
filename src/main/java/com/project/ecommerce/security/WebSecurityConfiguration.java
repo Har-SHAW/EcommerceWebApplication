@@ -36,6 +36,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/processSignup").permitAll()
                 .antMatchers("/dashboard/**").hasAuthority("ROLE_USER")
                 .antMatchers("/adminDashboard/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/managerDashboard/**").hasAuthority("ROLE_MANAGER")
                 .anyRequest()
                 .authenticated()
                 .and()

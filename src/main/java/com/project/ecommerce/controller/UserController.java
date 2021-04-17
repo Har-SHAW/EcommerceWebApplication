@@ -50,7 +50,7 @@ public class UserController {
 
         List<Item> items = new ArrayList<>();
         for (ItemEntity itemEntity : itemEntities){
-            items.add(new Item(itemEntity.getItemId(), itemEntity.getItemName(), itemEntity.getItemPrice()));
+            items.add(new Item(itemEntity));
         }
 
         return items;

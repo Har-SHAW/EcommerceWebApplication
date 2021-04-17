@@ -3,14 +3,17 @@ package com.project.ecommerce.dto.item;
 import com.project.ecommerce.entity.item.ItemEntity;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Item {
-    @NonNull private Long itemId;
-    @NonNull private String itemName;
-    @NonNull private Double itemPrice;
+    private Long itemId;
+    @NotNull(message = "is required")
+    private String itemName;
+    @NotNull(message = "is required")
+    private Double itemPrice;
 
     public Item(ItemEntity itemEntity){
         this.setItemId(itemEntity.getItemId());

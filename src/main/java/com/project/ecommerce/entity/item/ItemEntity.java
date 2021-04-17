@@ -1,6 +1,7 @@
 package com.project.ecommerce.entity.item;
 
 import com.project.ecommerce.dto.item.Item;
+import com.project.ecommerce.entity.order.OrderItemEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
