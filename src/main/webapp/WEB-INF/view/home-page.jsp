@@ -2,29 +2,29 @@
 <html>
 <body>
 <sec:authorize access="hasRole('ROLE_USER')">
-<a href="dashboard">go to dash board</a>
+<button onclick="location.href='dashboard'" type="button">User Dashboard</button>
 <br>
 <br>
 </sec:authorize>
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-<a href="adminDashboard">go to admin dash board</a>
+<button onclick="location.href='adminDashboard'" type="button">Admin Dashboard</button>
 <br>
 <br>
 </sec:authorize>
 
 <sec:authorize access="hasRole('ROLE_MANAGER')">
-<a href="managerDashboard">manager dash board</a>
+<button onclick="location.href='managerDashboard'" type="button">Manager Dashboard</button>
 <br>
 <br>
 </sec:authorize>
 
 <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
-<a href="employeeDashboard">employee dash board</a>
+<button onclick="location.href='employeeDashboard'" type="button">Employee Dashboard</button>
 <br>
 <br>
 </sec:authorize>
 
-<a href="logout">logout</a>
+<button onclick="location.href='logout'" style="background-color: red; color: white; font-weight: bold" type="button">Logout</button>
 </body>
 </html>

@@ -133,11 +133,11 @@ input {
 <div id="over">
     <div id="navbar">
 
-    <h2>Customer Registration Page</h2>
+    <h2>Item edit Page</h2>
 
     </div>
     <div id="bodyPart">
-        <div id="new">Sign Up</div>
+        <div id="new">Edit Item</div>
         <br>
         <br>
         <br>
@@ -154,7 +154,7 @@ input {
         </form:form>
         <br>
         <br>
-        <a href="/"><-- back to home page</a>
+        <a href="/"><-- Back</a>
         </div>
     </div>
     </div>

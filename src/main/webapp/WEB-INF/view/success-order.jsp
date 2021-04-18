@@ -2,6 +2,6 @@
 <body>
 <div>Success</div>
 <br>
-<a href="dashboard">go to dashboard</a>
+<button onclick="location.href='dashboard'" type="button"><-- Back</button>
 </body>
 </html>

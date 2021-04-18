@@ -3,9 +3,12 @@
 <!DOCTYPE html>
 <html>
 <body>
-u have user rights
 <c:forEach var="item" items="${items}">
-    <div>${item.itemName}  ${item.itemPrice}  <a href="editItem?itemId=${item.itemId}">EDIT</a> </div>
+    <div>Name: ${item.itemName}</div>
+    <div>Price: ${item.itemPrice}</div>
+    <div>
+    <button onclick="location.href='editItem?itemId=${item.itemId}'" type="button">EDIT</button>
+    </div>
     <br>
 </c:forEach>
 <br>
@@ -24,6 +27,6 @@ ADD ITEM:
         </form:form>
 <br>
 <br>
-<a href="/managerDashboard">back to homepage</a>
+<button onclick="location.href='/managerDashboard'" type="button"><-- Back</button>
 </body>
 </html>

@@ -2,6 +2,6 @@
 <body>
 <div>Success</div>
 <br>
-<a href="showUsers">go back</a>
+<button onclick="location.href='showUsers'" type="button"><-- Back</button>
 </body>
 </html>

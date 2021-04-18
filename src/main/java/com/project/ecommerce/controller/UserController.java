@@ -128,7 +128,8 @@ public class UserController extends InitBinderClass {
     }
 
     @RequestMapping("/logout")
-    public String logout(){
+    public String logout(HttpServletRequest httpServletRequest){
+        httpServletRequest.getSession().setAttribute("cart", null);
         SecurityContextHolder.getContext().setAuthentication(null);
         return "log-in";
     }

@@ -1,13 +1,11 @@
 <html>
 <body>
-<div>u have manager rights</div>
-
-
+<div>You have the Manager ROLE</div>
 <br>
 <br>
-<a href="managerDashboard/showItems">show items</a>
+<button onclick="location.href='managerDashboard/showItems'" type="button">Show Items</button>
 <br>
 <br>
-<a href="/">back to homepage</a>
+<button onclick="location.href='/'" type="button"><-- Back</button>
 </body>
 </html>

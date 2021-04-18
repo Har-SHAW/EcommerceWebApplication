@@ -133,7 +133,7 @@ input {
 <div id="over">
     <div id="navbar">
 
-    <h2>Customer Registration Page</h2>
+    <h2>User Registration Page</h2>
 
     </div>
     <div id="bodyPart">

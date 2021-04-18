@@ -1,11 +1,11 @@
 <html>
 <body>
-<div>u have admin rights</div>
+<div>You have the Admin ROLE</div>
 <br>
 <br>
-<a href="adminDashboard/showUsers">show users</a>
+<button onclick="location.href='adminDashboard/showUsers'" type="button">Show Users</button>
 <br>
 <br>
-<a href="/">back to homepage</a>
+<button onclick="location.href='/'" type="button"><-- Back</button>
 </body>
 </html>

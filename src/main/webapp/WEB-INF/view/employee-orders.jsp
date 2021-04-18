@@ -8,20 +8,17 @@
 <div>Orders:</div>
 <br>
 <c:forEach var="order" items="${orders}">
-<div>${order.orderDate}</div>
-<div>${order.user.username}</div>
-<div>${order.user.email}</div>
-<div>${order.user.phoneNo}</div>
-<br>
+<div>Date: ${order.orderDate}</div>
+<div>Username: ${order.user.username}</div>
+<div>Email: ${order.user.email}</div>
+<div>Phone Number: ${order.user.phoneNo}</div>
+<div>Items: </div>
 <c:forEach var="item" items="${order.orderItems}">
-    <div>itemName: ${item.item.itemName}  price: ${item.item.itemPrice}  quantity: ${item.quantity}</div>
-    <br>
+    <div>Item Name: ${item.item.itemName}  |  Price: ${item.item.itemPrice} | Quantity: ${item.quantity}</div>
 </c:forEach>
 <br>
 <br>
 </c:forEach>
-<br>
-<br>
-<a href="/employeeDashboard">back to dashboard</a>
+<button onclick="location.href='/employeeDashboard'" type="button"><-- Back</button>
 </body>
 </html>

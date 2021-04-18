@@ -1,11 +1,11 @@
 <html>
 <body>
-<div>u have employee rights</div>
+<div>You have the Employee ROLE</div>
 <br>
 <br>
-<a href="employeeDashboard/showOrders">show Orders</a>
+<button onclick="location.href='employeeDashboard/showOrders'" type="button">Show Orders</button>
 <br>
 <br>
-<a href="/">back to homepage</a>
+<button onclick="location.href='/'" type="button"><-- Back</button>
 </body>
 </html>

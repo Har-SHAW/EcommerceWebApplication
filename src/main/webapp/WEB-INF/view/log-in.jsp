@@ -134,11 +134,11 @@ input {
 <div id="over">
     <div id="navbar">
 
-    <h2>Customer Registration Page</h2>
+    <h2>User Login Page</h2>
 
     </div>
     <div id="bodyPart">
-        <div id="new">Login Admin</div>
+        <div id="new">Login</div>
         <br>
         <br>
         <br>

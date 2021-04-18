@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 <html>
 <body>
-u have user rights
 <c:forEach var="user" items="${users}">
-    <div>${user.username}  ${user.email}
+    <div>Username: ${user.username}</div>
+    <div>Email: ${user.email}</div>
+    <div>
+    <div>Roles: </div>
     <c:forEach var="role" items="${user.roles}">
         <div>${role.role}</div>
     </c:forEach>
@@ -32,6 +34,6 @@ Remove <form:radiobutton path="action" value="Remove"/>
 <br>
 <br>
 <br>
-<a href="/">back to homepage</a>
+<button onclick="location.href='/'" type="button"><-- Back</button>
 </body>
 </html>
