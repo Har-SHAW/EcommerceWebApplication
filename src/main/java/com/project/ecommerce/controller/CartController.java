@@ -1,5 +1,6 @@
 package com.project.ecommerce.controller;
 
+import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.item.Item;
 import com.project.ecommerce.dto.order.OrderItem;
 import com.project.ecommerce.entity.item.ItemEntity;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-public class CartController {
+public class CartController extends InitBinderClass {
 
     @Autowired
     ItemRepository itemRepository;

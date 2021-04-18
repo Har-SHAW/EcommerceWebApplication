@@ -1,6 +1,6 @@
 <html>
 <body>
-<div>u have admin rights</div>
+<div>u have employee rights</div>
 <br>
 <br>
 <a href="employeeDashboard/showOrders">show Orders</a>

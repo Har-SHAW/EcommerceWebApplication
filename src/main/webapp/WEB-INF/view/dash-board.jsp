@@ -17,8 +17,8 @@ Cart:
 <br>
 <c:forEach var="item" items="${cart.orderItems}">
     <div>${item.item.itemName}  ${item.item.itemPrice}  ${item.quantity}
-    <a href="incrementItem?itemId=${item.item.itemId}">+</a>
-    <a href="decrementItem?itemId=${item.item.itemId}">-</a>
+    <a href="incrementItem?itemId=${item.item.itemId}">< + ></a>
+    <a href="decrementItem?itemId=${item.item.itemId}">< - ></a>
     <a href="deleteItem?itemId=${item.item.itemId}">delete</a>
     </div>
     <br>

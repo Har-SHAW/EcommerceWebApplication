@@ -1,6 +1,6 @@
 <html>
 <body>
-<div>u have admin rights</div>
+<div>u have manager rights</div>
 
 
 <br>

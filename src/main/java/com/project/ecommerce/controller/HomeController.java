@@ -1,20 +1,12 @@
 package com.project.ecommerce.controller;
 
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import com.project.ecommerce.binder.InitBinderClass;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
-public class HomeController {
-
-    @InitBinder
-    public void initBinder(WebDataBinder dataBinder) {
-        StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
-        dataBinder.registerCustomEditor(String.class, stringTrimmer);
-    }
+public class HomeController extends InitBinderClass {
 
     @RequestMapping("/")
     public String getHomePage(){

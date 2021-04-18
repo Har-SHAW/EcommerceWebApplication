@@ -1,5 +1,6 @@
 package com.project.ecommerce.controller;
 
+import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.item.Item;
 import com.project.ecommerce.dto.order.Order;
 import com.project.ecommerce.dto.order.OrderItem;
@@ -12,13 +13,10 @@ import com.project.ecommerce.repository.ItemRepository;
 import com.project.ecommerce.repository.OrderRepository;
 import com.project.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,13 +26,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-public class UserController {
-
-    @InitBinder
-    public void initBinder(WebDataBinder dataBinder) {
-        StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
-        dataBinder.registerCustomEditor(String.class, stringTrimmer);
-    }
+public class UserController extends InitBinderClass {
 
     @Autowired
     ItemRepository itemRepository;
