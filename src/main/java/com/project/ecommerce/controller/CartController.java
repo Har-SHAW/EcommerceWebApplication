@@ -1,11 +1,9 @@
 package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
-import com.project.ecommerce.dto.item.Item;
 import com.project.ecommerce.dto.order.OrderItem;
-import com.project.ecommerce.entity.item.ItemEntity;
 import com.project.ecommerce.model.CartModel;
-import com.project.ecommerce.repository.ItemRepository;
+import com.project.ecommerce.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,34 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 @RequestMapping("/")
 public class CartController extends InitBinderClass {
 
     @Autowired
-    ItemRepository itemRepository;
-
-    public List<Item> getItemsList(){
-        List<ItemEntity> itemEntities = itemRepository.findAll();
-
-        List<Item> items = new ArrayList<>();
-        for (ItemEntity itemEntity : itemEntities){
-            items.add(new Item(itemEntity));
-        }
-
-        return items;
-    }
-
-    public boolean containsOrderItem(final List<OrderItem> list, final Long id){
-        return list.stream().anyMatch(o -> o.getItem().getItemId().equals(id));
-    }
-
-    public OrderItem findOrderItem(final List<OrderItem> list, final Long id){
-        return list.stream().filter(o -> o.getItem().getItemId().equals(id)).findFirst().orElse(null);
-    }
+    CartService cartService;
 
     @RequestMapping("/addItem")
     public String addItem(@RequestParam(name = "itemId") String itemId,
@@ -51,19 +27,12 @@ public class CartController extends InitBinderClass {
         Long itemIdLong = Long.parseLong(itemId);
         CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
 
-        model.addAttribute("items", getItemsList());
+        model.addAttribute("items", cartService.getItemsList());
 
-        if (containsOrderItem(cartModel.getOrderItems(), itemIdLong)) {
+        if (cartService.containsOrderItem(cartModel.getOrderItems(), itemIdLong)) {
             return "dash-board";
         }
-
-        ItemEntity itemEntity = itemRepository.getOne(Long.parseLong(itemId));
-        Item item = new Item(itemEntity);
-
-        OrderItem orderItem = new OrderItem();
-        orderItem.setItem(item);
-        orderItem.setQuantity(1);
-        cartModel.addItem(orderItem);
+        cartModel.addItem(cartService.getOrderItem(Long.parseLong(itemId)));
 
         model.addAttribute("cart",cartModel);
 
@@ -77,13 +46,13 @@ public class CartController extends InitBinderClass {
         Long itemIdLong = Long.parseLong(itemId);
         CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
 
-        OrderItem orderItem = findOrderItem(cartModel.getOrderItems(), itemIdLong);
+        OrderItem orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
 
         orderItem.setQuantity(orderItem.getQuantity() + 1);
         cartModel.setTotalPrice(cartModel.getTotalPrice() + orderItem.getItem().getItemPrice());
 
         model.addAttribute("cart", cartModel);
-        model.addAttribute("items", getItemsList());
+        model.addAttribute("items", cartService.getItemsList());
 
         return "dash-board";
     }
@@ -95,7 +64,7 @@ public class CartController extends InitBinderClass {
         Long itemIdLong = Long.parseLong(itemId);
         CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
 
-        OrderItem orderItem = findOrderItem(cartModel.getOrderItems(), itemIdLong);
+        OrderItem orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
 
         if (orderItem.getQuantity() > 1) {
             orderItem.setQuantity(orderItem.getQuantity() - 1);
@@ -103,7 +72,7 @@ public class CartController extends InitBinderClass {
         }
 
         model.addAttribute("cart", cartModel);
-        model.addAttribute("items", getItemsList());
+        model.addAttribute("items", cartService.getItemsList());
 
         return "dash-board";
     }
@@ -115,12 +84,12 @@ public class CartController extends InitBinderClass {
         Long itemIdLong = Long.parseLong(itemId);
         CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
 
-        OrderItem orderItem = findOrderItem(cartModel.getOrderItems(), itemIdLong);
+        OrderItem orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
 
         cartModel.removeItem(orderItem);
 
         model.addAttribute("cart", cartModel);
-        model.addAttribute("items", getItemsList());
+        model.addAttribute("items", cartService.getItemsList());
 
         return "dash-board";
     }

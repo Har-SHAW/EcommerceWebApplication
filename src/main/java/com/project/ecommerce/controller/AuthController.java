@@ -7,6 +7,7 @@ import com.project.ecommerce.entity.user.UserDetailsEntity;
 import com.project.ecommerce.entity.user.UserEntity;
 import com.project.ecommerce.repository.RoleRepository;
 import com.project.ecommerce.repository.UserRepository;
+import com.project.ecommerce.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -23,32 +24,7 @@ import javax.validation.Valid;
 public class AuthController extends InitBinderClass {
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
-
-    @Autowired
-    PasswordEncoder encoder;
-
-    public void registerTheUser(UserSignup theUser){
-        UserEntity userEntity = new UserEntity();
-        userEntity.setPassword(encoder.encode(theUser.getPassword()));
-        userEntity.setUsername(theUser.getUsername());
-
-        UserDetailsEntity userDetailsEntity = new UserDetailsEntity();
-        userDetailsEntity.setAge(theUser.getAge());
-        userDetailsEntity.setEmail(theUser.getEmail());
-        userDetailsEntity.setPhoneNo(theUser.getPhoneNo());
-
-        userEntity.setUserDetailsEntity(userDetailsEntity);
-
-        RolesEntity rolesEntity = roleRepository.getOne("ROLE_USER");
-
-        userEntity.addRole(rolesEntity);
-
-        userRepository.save(userEntity);
-    }
+    AuthService authService;
 
     @RequestMapping("/signup")
     public String registerUser(Model model){
@@ -58,20 +34,13 @@ public class AuthController extends InitBinderClass {
 
     @PostMapping("/processSignup")
     public String processSignUp(@Valid @ModelAttribute("user") UserSignup theUser, BindingResult bindingResult, Model model){
-
         if (theUser.getConfirmPassword()!=null && !theUser.getPassword().equals(theUser.getConfirmPassword())){
             bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "Password not matched");
         }
-
         if (bindingResult.hasErrors()){
             return "sign-up";
         }else {
-            if(userRepository.existsById(theUser.getUsername())) {
-                return "error-page";
-            }
-
-            registerTheUser(theUser);
-
+            authService.registerTheUser(theUser);
             return "log-in";
         }
     }

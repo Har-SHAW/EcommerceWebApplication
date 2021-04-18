@@ -7,6 +7,7 @@ import com.project.ecommerce.entity.user.RolesEntity;
 import com.project.ecommerce.entity.user.UserEntity;
 import com.project.ecommerce.repository.RoleRepository;
 import com.project.ecommerce.repository.UserRepository;
+import com.project.ecommerce.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,26 +24,12 @@ import java.util.List;
 public class AdminController extends InitBinderClass {
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
-
-    public List<AdminUser> getAllUsers(){
-        List<UserEntity> userEntities = userRepository.findAll();
-
-        List<AdminUser> adminUsers = new ArrayList<>();
-        for (UserEntity userEntity : userEntities){
-            adminUsers.add(new AdminUser(userEntity));
-        }
-
-        return adminUsers;
-    }
+    AdminService adminService;
 
     @RequestMapping("/showUsers")
     public String showUsers(Model model){
 
-        model.addAttribute("users", getAllUsers());
+        model.addAttribute("users", adminService.getAllUsers());
 
         model.addAttribute("userRole", new UserRole());
 
@@ -52,18 +39,10 @@ public class AdminController extends InitBinderClass {
     @RequestMapping("/changeRole")
     public String addRoleToUser(@Valid @ModelAttribute("userRole") UserRole userRole, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
-            model.addAttribute("users", getAllUsers());
+            model.addAttribute("users", adminService.getAllUsers());
             return "admin-users";
         }
-        RolesEntity rolesEntity = roleRepository.findById(userRole.getRole()).orElse(null);
-        UserEntity userEntity = userRepository.findById(userRole.getUsername()).orElse(null);
-        assert userEntity != null;
-        if (userRole.getAction().equals("Add")){
-            userEntity.addRole(rolesEntity);
-        }else{
-            userEntity.getRolesEntities().remove(rolesEntity);
-        }
-        userRepository.save(userEntity);
+        adminService.changeRole(userRole);
         return "success-role";
     }
 }

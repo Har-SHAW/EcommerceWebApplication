@@ -4,6 +4,7 @@ import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.item.Item;
 import com.project.ecommerce.entity.item.ItemEntity;
 import com.project.ecommerce.repository.ItemRepository;
+import com.project.ecommerce.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,29 +23,18 @@ import java.util.Objects;
 public class ManagerController extends InitBinderClass {
 
     @Autowired
-    ItemRepository itemRepository;
-
-    public List<Item> getAllItems(){
-        List<ItemEntity> itemEntities = itemRepository.findAll();
-        List<Item> items = new ArrayList<>();
-
-        for (ItemEntity itemEntity : itemEntities){
-            items.add(new Item(itemEntity));
-        }
-
-        return items;
-    }
+    ManagerService managerService;
 
     @RequestMapping("/showItems")
     public String showItems(Model model){
-        model.addAttribute("items", getAllItems());
+        model.addAttribute("items", managerService.getAllItems());
         model.addAttribute("item", new Item());
         return "manager-items";
     }
 
     @RequestMapping("/editItem")
     public String editItem(@RequestParam("itemId") String itemId, Model model){
-        Item item = new Item(Objects.requireNonNull(itemRepository.findById(Long.parseLong(itemId)).orElse(null)));
+        Item item = managerService.getItemById(Long.parseLong(itemId));
         model.addAttribute("item", item);
         return "edit-item";
     }
@@ -56,13 +46,9 @@ public class ManagerController extends InitBinderClass {
             return "edit-item";
         }
 
-        ItemEntity itemEntity = itemRepository.findById(item.getItemId()).orElse(null);
-        assert itemEntity != null;
-        itemEntity.setItemName(item.getItemName());
-        itemEntity.setItemPrice(item.getItemPrice());
-        itemRepository.save(itemEntity);
+        managerService.editItem(item);
 
-        model.addAttribute("items", getAllItems());
+        model.addAttribute("items", managerService.getAllItems());
         model.addAttribute("item", new Item());
         return "manager-items";
     }
@@ -70,32 +56,26 @@ public class ManagerController extends InitBinderClass {
     @RequestMapping("/processAdd")
     public String processAdd(@Valid @ModelAttribute("item") Item item, BindingResult bindingResult, Model model){
 
-        if (itemRepository.findByItemName(item.getItemName()) != null){
+        if (managerService.findByName(item.getItemName()) != null){
             bindingResult.rejectValue("itemName", "error.itemName", "Item already exist");
         }
 
-
         if (bindingResult.hasErrors()){
-            model.addAttribute("items", getAllItems());
+            model.addAttribute("items", managerService.getAllItems());
             return "manager-items";
         }
 
-        ItemEntity itemEntity = new ItemEntity();
-        itemEntity.setItemName(item.getItemName());
-        itemEntity.setItemPrice(item.getItemPrice());
-        itemRepository.save(itemEntity);
+        managerService.addItem(item);
 
         model.addAttribute("item", new Item());
-        model.addAttribute("items", getAllItems());
+        model.addAttribute("items", managerService.getAllItems());
         return "manager-items";
     }
 
     @RequestMapping("/deleteItem")
     public String deleteItem(@RequestParam("itemId") String itemId, Model model){
-        ItemEntity itemEntity = itemRepository.findById(Long.parseLong(itemId)).orElse(null);
-        assert itemEntity != null;
-        itemRepository.delete(itemEntity);
-        model.addAttribute("items", getAllItems());
+        managerService.deleteItem(Long.parseLong(itemId));
+        model.addAttribute("items", managerService.getAllItems());
         return "manager-items";
     }
 }
