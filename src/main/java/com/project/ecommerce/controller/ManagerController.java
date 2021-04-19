@@ -2,6 +2,7 @@ package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.item.Item;
+import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,34 +21,33 @@ public class ManagerController extends InitBinderClass {
     @Autowired
     ManagerService managerService;
 
-    public static final String MANAGER_ITEMS = "manager-items";
 
     @RequestMapping("/showItems")
     public String showItems(Model model){
         model.addAttribute(CartController.ITEMS, managerService.getAllItems());
         model.addAttribute("item", new Item());
-        return MANAGER_ITEMS;
+        return JspPages.MANAGER_ITEMS;
     }
 
     @RequestMapping("/editItem")
     public String editItem(@RequestParam("itemId") String itemId, Model model){
         Item item = managerService.getItemById(Long.parseLong(itemId));
         model.addAttribute("item", item);
-        return "edit-item";
+        return JspPages.EDIT_ITEM;
     }
 
     @RequestMapping("/processEdit")
     public String processEdit(@Valid @ModelAttribute("item") Item item, BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()){
-            return "edit-item";
+            return JspPages.EDIT_ITEM;
         }
 
         managerService.editItem(item);
 
         model.addAttribute(CartController.ITEMS, managerService.getAllItems());
         model.addAttribute("item", new Item());
-        return MANAGER_ITEMS;
+        return JspPages.MANAGER_ITEMS;
     }
 
     @RequestMapping("/processAdd")
@@ -63,13 +63,13 @@ public class ManagerController extends InitBinderClass {
         }
 
         model.addAttribute(CartController.ITEMS, managerService.getAllItems());
-        return MANAGER_ITEMS;
+        return JspPages.MANAGER_ITEMS;
     }
 
     @RequestMapping("/deleteItem")
     public String deleteItem(@RequestParam("itemId") String itemId, Model model){
         managerService.deleteItem(Long.parseLong(itemId));
         model.addAttribute(CartController.ITEMS, managerService.getAllItems());
-        return MANAGER_ITEMS;
+        return JspPages.MANAGER_ITEMS;
     }
 }

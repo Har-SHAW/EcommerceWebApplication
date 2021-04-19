@@ -2,6 +2,7 @@ package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.user.UserRole;
+import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,6 @@ public class AdminController extends InitBinderClass {
     AdminService adminService;
 
     private static final String USERS = "users";
-    private static final String ADMIN_USERS = "admin-users";
     private static final String USER_ROLE = "userRole";
 
     @RequestMapping("/showUsers")
@@ -31,7 +31,7 @@ public class AdminController extends InitBinderClass {
 
         model.addAttribute(USER_ROLE, new UserRole());
 
-        return ADMIN_USERS;
+        return JspPages.ADMIN_USERS;
     }
 
     @RequestMapping("/changeRole")
@@ -48,7 +48,7 @@ public class AdminController extends InitBinderClass {
         model.addAttribute(USERS, adminService.getAllUsers());
         model.addAttribute(USER_ROLE, new UserRole());
 
-        return ADMIN_USERS;
+        return JspPages.ADMIN_USERS;
     }
 
     @RequestMapping("/deleteUser")
@@ -56,6 +56,6 @@ public class AdminController extends InitBinderClass {
         adminService.deleteUser(username);
         model.addAttribute(USERS, adminService.getAllUsers());
         model.addAttribute(USER_ROLE, new UserRole());
-        return ADMIN_USERS;
+        return JspPages.ADMIN_USERS;
     }
 }

@@ -1,6 +1,7 @@
 package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
+import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.model.CartModel;
 import com.project.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class UserController extends InitBinderClass {
 
         model.addAttribute("items", userService.getItemsList());
 
-        return "dash-board";
+        return JspPages.DASH_BOARD;
     }
 
     @RequestMapping("/placeOrder")
@@ -39,25 +40,25 @@ public class UserController extends InitBinderClass {
 
         if (cartModel.getOrderItems().isEmpty()){
             model.addAttribute("items", userService.getItemsList());
-            return "dash-board";
+            return JspPages.DASH_BOARD;
         }
 
         userService.placeOrder(cartModel);
 
-        return "success-order";
+        return JspPages.SUCCESS_ORDER;
     }
 
     @RequestMapping("/showOrders")
     public String showOrders(Model model, HttpServletRequest request){
 
         model.addAttribute("orders", userService.getOrdersOfUser());
-        return "user-orders";
+        return JspPages.USER_ORDERS;
     }
 
     @RequestMapping("/logout")
     public String logout(HttpServletRequest httpServletRequest){
         httpServletRequest.getSession().setAttribute("cart", null);
         SecurityContextHolder.getContext().setAuthentication(null);
-        return "log-in";
+        return JspPages.LOG_IN;
     }
 }

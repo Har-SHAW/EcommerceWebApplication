@@ -1,6 +1,7 @@
 package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
+import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,6 @@ public class EmployeeController extends InitBinderClass {
     @RequestMapping("/showOrders")
     public String showOrders(Model model){
         model.addAttribute("orders", employeeService.getAllOrders());
-        return "employee-orders";
+        return JspPages.EMPLOYEE_ORDERS;
     }
 }

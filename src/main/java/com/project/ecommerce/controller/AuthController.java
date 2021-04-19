@@ -2,8 +2,10 @@ package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.user.UserSignup;
+import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Jsp;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +23,10 @@ public class AuthController extends InitBinderClass {
     @Autowired
     AuthService authService;
 
-    @Autowired
-    AuthenticationManager authenticationManager;
-
     @RequestMapping("/signup")
     public String registerUser(Model model){
         model.addAttribute("user", new UserSignup());
-        return "sign-up";
+        return JspPages.SIGN_UP;
     }
 
     @PostMapping("/processSignup")
@@ -36,10 +35,10 @@ public class AuthController extends InitBinderClass {
             bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "Password not matched");
         }
         if (bindingResult.hasErrors()){
-            return "sign-up";
+            return JspPages.SIGN_UP;
         }else {
             authService.registerTheUser(theUser);
-            return "log-in";
+            return JspPages.LOG_IN;
         }
     }
 }
