@@ -1,7 +1,10 @@
 package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
+import com.project.ecommerce.dto.user.UserLogin;
+import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -14,8 +17,8 @@ public class HomeController extends InitBinderClass {
     }
 
     @RequestMapping("/loginPage")
-    public String getLoginPage(){
-        return "log-in";
+    public String getLoginPage(Model model){
+    return "log-in";
     }
 
     @RequestMapping("/adminDashboard")

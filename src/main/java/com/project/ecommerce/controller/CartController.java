@@ -2,6 +2,7 @@ package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.order.OrderItem;
+import com.project.ecommerce.exceptions.CartNotInitialisedException;
 import com.project.ecommerce.model.CartModel;
 import com.project.ecommerce.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/")
 public class CartController extends InitBinderClass {
@@ -26,6 +28,10 @@ public class CartController extends InitBinderClass {
 
         Long itemIdLong = Long.parseLong(itemId);
         CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
+
+        if (cartModel == null){
+            throw new CartNotInitialisedException();
+        }
 
         model.addAttribute("items", cartService.getItemsList());
 
@@ -46,6 +52,10 @@ public class CartController extends InitBinderClass {
         Long itemIdLong = Long.parseLong(itemId);
         CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
 
+        if (cartModel == null){
+            throw new CartNotInitialisedException();
+        }
+
         OrderItem orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
 
         orderItem.setQuantity(orderItem.getQuantity() + 1);
@@ -61,8 +71,13 @@ public class CartController extends InitBinderClass {
     public String decrementItem(@RequestParam(name = "itemId") String itemId,
                                 Model model,
                                 HttpServletRequest request){
+
         Long itemIdLong = Long.parseLong(itemId);
         CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
+
+        if (cartModel == null){
+            throw new CartNotInitialisedException();
+        }
 
         OrderItem orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
 
@@ -83,6 +98,10 @@ public class CartController extends InitBinderClass {
                              HttpServletRequest request){
         Long itemIdLong = Long.parseLong(itemId);
         CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
+
+        if (cartModel == null){
+            throw new CartNotInitialisedException();
+        }
 
         OrderItem orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
 

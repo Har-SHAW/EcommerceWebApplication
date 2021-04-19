@@ -47,4 +47,8 @@ public class AdminService {
     public void deleteUser(String username){
         userRepository.deleteById(username);
     }
+
+    public boolean isValidRole(String role){
+        return roleRepository.existsById(role);
+    }
 }

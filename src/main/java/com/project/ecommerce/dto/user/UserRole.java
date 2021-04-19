@@ -16,7 +16,6 @@ public class UserRole {
     @ValidUsername
     private String username;
     @NotNull(message = "is required")
-    @ValidRole
     private String role;
     @NotNull(message = "is required")
     private String action;
