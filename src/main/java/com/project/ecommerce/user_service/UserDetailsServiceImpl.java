@@ -1,4 +1,4 @@
-package com.project.ecommerce.userService;
+package com.project.ecommerce.user_service;
 
 import com.project.ecommerce.entity.user.UserEntity;
 import com.project.ecommerce.repository.UserRepository;

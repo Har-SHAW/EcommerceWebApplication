@@ -1,14 +1,10 @@
 package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
-import com.project.ecommerce.dto.user.UserLogin;
 import com.project.ecommerce.dto.user.UserSignup;
 import com.project.ecommerce.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

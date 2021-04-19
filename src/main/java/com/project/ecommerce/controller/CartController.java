@@ -20,6 +20,9 @@ public class CartController extends InitBinderClass {
     @Autowired
     CartService cartService;
 
+    public static final String ITEMS="items";
+    public static final String DASHBOARD="dash-board";
+
     @RequestMapping("/addItem")
     public String addItem(@RequestParam(name = "itemId") String itemId,
                           Model model,
@@ -33,16 +36,16 @@ public class CartController extends InitBinderClass {
             throw new CartNotInitialisedException();
         }
 
-        model.addAttribute("items", cartService.getItemsList());
+        model.addAttribute(ITEMS, cartService.getItemsList());
 
         if (cartService.containsOrderItem(cartModel.getOrderItems(), itemIdLong)) {
-            return "dash-board";
+            return DASHBOARD;
         }
         cartModel.addItem(cartService.getOrderItem(Long.parseLong(itemId)));
 
         model.addAttribute("cart",cartModel);
 
-        return "dash-board";
+        return DASHBOARD;
     }
 
     @RequestMapping("/incrementItem")
@@ -62,9 +65,9 @@ public class CartController extends InitBinderClass {
         cartModel.setTotalPrice(cartModel.getTotalPrice() + orderItem.getItem().getItemPrice());
 
         model.addAttribute("cart", cartModel);
-        model.addAttribute("items", cartService.getItemsList());
+        model.addAttribute(ITEMS, cartService.getItemsList());
 
-        return "dash-board";
+        return DASHBOARD;
     }
 
     @RequestMapping("/decrementItem")
@@ -87,9 +90,9 @@ public class CartController extends InitBinderClass {
         }
 
         model.addAttribute("cart", cartModel);
-        model.addAttribute("items", cartService.getItemsList());
+        model.addAttribute(ITEMS, cartService.getItemsList());
 
-        return "dash-board";
+        return DASHBOARD;
     }
 
     @RequestMapping("/deleteItem")
@@ -108,8 +111,8 @@ public class CartController extends InitBinderClass {
         cartModel.removeItem(orderItem);
 
         model.addAttribute("cart", cartModel);
-        model.addAttribute("items", cartService.getItemsList());
+        model.addAttribute(ITEMS, cartService.getItemsList());
 
-        return "dash-board";
+        return DASHBOARD;
     }
 }

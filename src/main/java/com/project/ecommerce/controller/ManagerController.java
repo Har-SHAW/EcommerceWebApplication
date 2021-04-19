@@ -20,11 +20,13 @@ public class ManagerController extends InitBinderClass {
     @Autowired
     ManagerService managerService;
 
+    public static final String MANAGER_ITEMS = "manager-items";
+
     @RequestMapping("/showItems")
     public String showItems(Model model){
-        model.addAttribute("items", managerService.getAllItems());
+        model.addAttribute(CartController.ITEMS, managerService.getAllItems());
         model.addAttribute("item", new Item());
-        return "manager-items";
+        return MANAGER_ITEMS;
     }
 
     @RequestMapping("/editItem")
@@ -43,9 +45,9 @@ public class ManagerController extends InitBinderClass {
 
         managerService.editItem(item);
 
-        model.addAttribute("items", managerService.getAllItems());
+        model.addAttribute(CartController.ITEMS, managerService.getAllItems());
         model.addAttribute("item", new Item());
-        return "manager-items";
+        return MANAGER_ITEMS;
     }
 
     @RequestMapping("/processAdd")
@@ -55,22 +57,19 @@ public class ManagerController extends InitBinderClass {
             bindingResult.rejectValue("itemName", "error.itemName", "Item already exist");
         }
 
-        if (bindingResult.hasErrors()){
-            model.addAttribute("items", managerService.getAllItems());
-            return "manager-items";
+        if (!bindingResult.hasErrors()){
+            managerService.addItem(item);
+            model.addAttribute("item", new Item());
         }
 
-        managerService.addItem(item);
-
-        model.addAttribute("item", new Item());
-        model.addAttribute("items", managerService.getAllItems());
-        return "manager-items";
+        model.addAttribute(CartController.ITEMS, managerService.getAllItems());
+        return MANAGER_ITEMS;
     }
 
     @RequestMapping("/deleteItem")
     public String deleteItem(@RequestParam("itemId") String itemId, Model model){
         managerService.deleteItem(Long.parseLong(itemId));
-        model.addAttribute("items", managerService.getAllItems());
-        return "manager-items";
+        model.addAttribute(CartController.ITEMS, managerService.getAllItems());
+        return MANAGER_ITEMS;
     }
 }

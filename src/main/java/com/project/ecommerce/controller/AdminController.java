@@ -20,14 +20,18 @@ public class AdminController extends InitBinderClass {
     @Autowired
     AdminService adminService;
 
+    private static final String USERS = "users";
+    private static final String ADMIN_USERS = "admin-users";
+    private static final String USER_ROLE = "userRole";
+
     @RequestMapping("/showUsers")
     public String showUsers(Model model){
 
-        model.addAttribute("users", adminService.getAllUsers());
+        model.addAttribute(USERS, adminService.getAllUsers());
 
-        model.addAttribute("userRole", new UserRole());
+        model.addAttribute(USER_ROLE, new UserRole());
 
-        return "admin-users";
+        return ADMIN_USERS;
     }
 
     @RequestMapping("/changeRole")
@@ -37,24 +41,21 @@ public class AdminController extends InitBinderClass {
             bindingResult.rejectValue("role", "error.role", "No such role");
         }
 
-        if (bindingResult.hasErrors()){
-            model.addAttribute("users", adminService.getAllUsers());
-            return "admin-users";
+        if (!bindingResult.hasErrors()){
+            adminService.changeRole(userRole);
         }
 
-        adminService.changeRole(userRole);
+        model.addAttribute(USERS, adminService.getAllUsers());
+        model.addAttribute(USER_ROLE, new UserRole());
 
-        model.addAttribute("users", adminService.getAllUsers());
-        model.addAttribute("userRole", new UserRole());
-
-        return "admin-users";
+        return ADMIN_USERS;
     }
 
     @RequestMapping("/deleteUser")
     public String deleteUser(@RequestParam("username") String username, Model model){
         adminService.deleteUser(username);
-        model.addAttribute("users", adminService.getAllUsers());
-        model.addAttribute("userRole", new UserRole());
-        return "admin-users";
+        model.addAttribute(USERS, adminService.getAllUsers());
+        model.addAttribute(USER_ROLE, new UserRole());
+        return ADMIN_USERS;
     }
 }

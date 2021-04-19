@@ -13,7 +13,7 @@ public class NotFoundExceptionHandler {
     }
 
     @ExceptionHandler(CartNotInitialisedException.class)
-    public String NoCartExceptionHandler() {
+    public String noCartExceptionHandler() {
         return "redirect:/dashboard";
     }
 }
