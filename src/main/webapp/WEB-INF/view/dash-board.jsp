@@ -94,13 +94,28 @@
          border-radius: 20px;
          margin-bottom: 20px;
          }
+         .imgCart{
+                  height: 5vw;
+                  width: 5vw;
+                  background: lightgrey;
+                  border-radius: 20px;
+                  }
          .itemCon{
          display: flex;
          justify-content: space-between;
          }
          .plusMinus{
          display: flex;
-         justify-content: space-around;
+         justify-content: space-between;
+         }
+         .itemConBut{
+         display: flex;
+         height: 5vw;
+         flex-direction: column;
+         justify-content: space-between;
+         }
+         .itemConTxt{
+         text-align: left;
          }
       </style>
    </head>
@@ -133,8 +148,9 @@
             <div class="cartItems">
                <c:forEach var="item" items="${cart.orderItems}">
                   <div class="card">
-                     <div class="img"></div>
-                     <div class="itemCon">
+                  <div class="itemCon">
+                     <div class="imgCart"></div>
+
                         <div class="itemConText">
                            <div>Name: ${item.item.itemName}</div>
                            <div>Price: ${item.item.itemPrice}</div>
@@ -146,7 +162,7 @@
                               <button onclick="location.href='decrementItem?itemId=${item.item.itemId}'" type="button"> - </button>
                            </div>
                            <div>
-                              <button onclick="location.href='deleteItem?itemId=${item.item.itemId}'" type="button">Remove from Cart</button>
+                              <button onclick="location.href='deleteItem?itemId=${item.item.itemId}'" type="button">Remove</button>
                            </div>
                         </div>
                      </div>

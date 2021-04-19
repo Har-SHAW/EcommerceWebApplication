@@ -154,7 +154,7 @@ input {
         </form:form>
         <br>
         <br>
-        <a href="/"><-- Back</a>
+        <a href="showItems"><-- Back</a>
         </div>
     </div>
     </div>

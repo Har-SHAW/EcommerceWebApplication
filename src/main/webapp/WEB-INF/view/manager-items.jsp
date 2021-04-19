@@ -2,13 +2,46 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
+<head>
+<style>
+.body{
+margin: 0px;
+}
+.home{
+height: 100%;
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+.inputButton {
+         text-align: center;
+         transition: 0.25s;
+         padding: 10px 20px;
+         outline: none;
+         border-radius: 24px;
+         border: 1px solid #436576;
+         background: #436576;
+         color: white;
+         font-weight: bold;
+         }
+         .inputButton:hover {
+         background: white;
+         color: #436576;
+         cursor: pointer;
+         }
+</style>
+</head>
 <body>
+<div class="home">
+<br>
+<br>
+<br>
+<br>
 <c:forEach var="item" items="${items}">
-    <div>Name: ${item.itemName}</div>
-    <div>Price: ${item.itemPrice}</div>
-    <div>
-    <button onclick="location.href='editItem?itemId=${item.itemId}'" type="button">EDIT</button>
-    </div>
+    <div>Name: ${item.itemName} | Price: ${item.itemPrice} | <button onclick="location.href='editItem?itemId=${item.itemId}'" type="button">EDIT</button></div>
     <br>
 </c:forEach>
 <br>
@@ -28,5 +61,6 @@ ADD ITEM:
 <br>
 <br>
 <button onclick="location.href='/managerDashboard'" type="button"><-- Back</button>
+</div>
 </body>
 </html>

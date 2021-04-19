@@ -2,7 +2,40 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
+<head>
+<style>
+.body{
+margin: 0px;
+}
+.home{
+height: 100%;
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+.inputButton {
+         text-align: center;
+         transition: 0.25s;
+         padding: 10px 20px;
+         outline: none;
+         border-radius: 24px;
+         border: 1px solid #436576;
+         background: #436576;
+         color: white;
+         font-weight: bold;
+         }
+         .inputButton:hover {
+         background: white;
+         color: #436576;
+         cursor: pointer;
+         }
+</style>
+</head>
 <body>
+<div class="home"
 <br>
 <br>
 <div>Orders:</div>
@@ -19,6 +52,7 @@
 <br>
 <br>
 </c:forEach>
-<button onclick="location.href='/employeeDashboard'" type="button"><-- Back</button>
+<button onclick="location.href='/employeeDashboard'" type="button" style="background-color: red; color: white; font-weight: bold;"><-- Back</button>
+</div>
 </body>
 </html>

@@ -2,8 +2,6 @@ package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.item.Item;
-import com.project.ecommerce.entity.item.ItemEntity;
-import com.project.ecommerce.repository.ItemRepository;
 import com.project.ecommerce.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/managerDashboard")

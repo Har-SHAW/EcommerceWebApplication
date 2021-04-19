@@ -43,4 +43,8 @@ public class AdminService {
         }
         userRepository.save(userEntity);
     }
+
+    public void deleteUser(String username){
+        userRepository.deleteById(username);
+    }
 }
