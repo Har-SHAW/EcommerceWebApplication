@@ -32,7 +32,7 @@ class SimpleSpringECommerceProjectApplicationTests {
 
 	@Test
 	void shouldReturnDefaultMessage() throws Exception {
-		this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().is(302));
+		this.mockMvc.perform(get("/")).andExpect(status().is(302));
 	}
 
 	@Test
