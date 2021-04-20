@@ -29,6 +29,22 @@ text-align: center;
          color: #436576;
          cursor: pointer;
          }
+         .redInputButton {
+                                     text-align: center;
+                                     transition: 0.25s;
+                                     padding: 5px 10px;
+                                     outline: none;
+                                     border-radius: 24px;
+                                     border: 1px solid #D2042D;
+                                     background: #D2042D;
+                                     color: white;
+                                     font-weight: bold;
+                                     }
+                                     .redInputButton:hover {
+                                     background: white;
+                                     color: #D2042D;
+                                     cursor: pointer;
+                                     }
 </style>
 </head>
 <body>
@@ -39,7 +55,7 @@ text-align: center;
 <button onclick="location.href='managerDashboard/showItems'" type="button" class="inputButton">Show Items</button>
 <br>
 <br>
-<button onclick="location.href='/'" type="button" style="background-color: red; color: white; font-weight: bold;"><-- Back</button>
+<button onclick="location.href='/'" type="button" class="redInputButton">Back</button>
 </div>
 </body>
 </html>

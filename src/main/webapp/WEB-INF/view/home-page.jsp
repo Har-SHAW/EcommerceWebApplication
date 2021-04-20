@@ -30,6 +30,22 @@ text-align: center;
          color: #436576;
          cursor: pointer;
          }
+         .redInputButton {
+                                     text-align: center;
+                                     transition: 0.25s;
+                                     padding: 5px 10px;
+                                     outline: none;
+                                     border-radius: 24px;
+                                     border: 1px solid #D2042D;
+                                     background: #D2042D;
+                                     color: white;
+                                     font-weight: bold;
+                                     }
+                                     .redInputButton:hover {
+                                     background: white;
+                                     color: #D2042D;
+                                     cursor: pointer;
+                                     }
 </style>
 </head>
 <body>
@@ -54,7 +70,7 @@ text-align: center;
 <br>
 </sec:authorize>
 <br>
-<button onclick="location.href='logout'" style="background-color: red; color: white; font-weight: bold" type="button">Logout</button>
+<button onclick="location.href='logout'" class="redInputButton" type="button">Logout</button>
 </div>
 </body>
 </html>

@@ -126,6 +126,22 @@ input {
     justify-content: center;
     align-items: center;
 }
+.redInputButton {
+                   text-align: center;
+                   transition: 0.25s;
+                   padding: 5px 10px;
+                   outline: none;
+                   border-radius: 24px;
+                   border: 1px solid #D2042D;
+                   background: #D2042D;
+                   color: white;
+                   font-weight: bold;
+                   }
+                   .redInputButton:hover {
+                   background: white;
+                   color: #D2042D;
+                   cursor: pointer;
+                   }
 
 </style>
 </head>
@@ -154,7 +170,7 @@ input {
         </form:form>
         <br>
         <br>
-        <a href="showItems"><-- Back</a>
+        <a href="showItems" class="redInputButton">Back</a>
         </div>
     </div>
     </div>

@@ -40,6 +40,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.logout().logoutUrl("/logout");
         http.authorizeRequests()
                 .antMatchers("/signup").permitAll()
+                .antMatchers("/static/**").permitAll()
                 .antMatchers("/processSignup").permitAll()
                 .antMatchers("/dashboard/**").hasAuthority("ROLE_USER")
                 .antMatchers("/adminDashboard/**").hasAuthority("ROLE_ADMIN")

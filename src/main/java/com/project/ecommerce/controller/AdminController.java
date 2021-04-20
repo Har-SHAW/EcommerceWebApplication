@@ -37,16 +37,16 @@ public class AdminController extends InitBinderClass {
     @RequestMapping("/changeRole")
     public String addRoleToUser(@Valid @ModelAttribute("userRole") UserRole userRole, BindingResult bindingResult, Model model){
 
-        if (!adminService.isValidRole(userRole.getRole())){
+        if (!bindingResult.hasErrors() && !adminService.isValidRole(userRole.getRole())){
             bindingResult.rejectValue("role", "error.role", "No such role");
         }
 
         if (!bindingResult.hasErrors()){
             adminService.changeRole(userRole);
+            model.addAttribute(USER_ROLE, new UserRole());
         }
 
         model.addAttribute(USERS, adminService.getAllUsers());
-        model.addAttribute(USER_ROLE, new UserRole());
 
         return JspPages.ADMIN_USERS;
     }
