@@ -5,8 +5,6 @@ import com.project.ecommerce.dto.user.UserSignup;
 import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Jsp;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

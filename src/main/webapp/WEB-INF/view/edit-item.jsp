@@ -2,6 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<link rel="icon" href="${pageContext.request.contextPath}/resource/favicon.ico" type="image/gif" sizes="16x16">
 <style>
 
 body {

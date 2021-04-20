@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="${pageContext.request.contextPath}/resource/favicon.ico" type="image/gif" sizes="16x16">
 <style>
 .card {
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
