@@ -18,10 +18,10 @@
 		<sonar.projectKey>Har5haw_spring-ecommerce-project</sonar.projectKey>
 		<sonar.organization>har5haw</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.login>207ce6dc9d47a7d1b943258e1295aea5cefc201e</sonar.login>
 		<sonar.exclusions>
 			**/dto/**,
-			**/jsp_pages/**
+			**/jsp_pages/**,
+			**/entity/**
 		</sonar.exclusions>
 	</properties>
 

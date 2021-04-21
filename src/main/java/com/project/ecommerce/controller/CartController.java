@@ -1,7 +1,6 @@
 package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
-import com.project.ecommerce.dto.order.OrderItem;
 import com.project.ecommerce.exceptions.CartNotInitialisedException;
 import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.model.CartModel;
@@ -58,7 +57,7 @@ public class CartController extends InitBinderClass {
             throw new CartNotInitialisedException();
         }
 
-        OrderItem orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
+        var orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
 
         orderItem.setQuantity(orderItem.getQuantity() + 1);
         cartModel.setTotalPrice(cartModel.getTotalPrice() + orderItem.getItem().getItemPrice());

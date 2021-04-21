@@ -1,7 +1,6 @@
 package com.project.ecommerce.service;
 
 import com.project.ecommerce.dto.user.UserSignup;
-import com.project.ecommerce.entity.user.RolesEntity;
 import com.project.ecommerce.entity.user.UserDetailsEntity;
 import com.project.ecommerce.entity.user.UserEntity;
 import com.project.ecommerce.repository.RoleRepository;

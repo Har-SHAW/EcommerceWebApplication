@@ -1,6 +1,5 @@
 package com.project.ecommerce.user_service;
 
-import com.project.ecommerce.entity.user.UserEntity;
 import com.project.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -2,7 +2,6 @@ package com.project.ecommerce.service;
 
 import com.project.ecommerce.dto.user.AdminUser;
 import com.project.ecommerce.dto.user.UserRole;
-import com.project.ecommerce.entity.user.RolesEntity;
 import com.project.ecommerce.entity.user.UserEntity;
 import com.project.ecommerce.repository.RoleRepository;
 import com.project.ecommerce.repository.UserRepository;

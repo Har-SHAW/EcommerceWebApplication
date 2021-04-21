@@ -6,7 +6,6 @@ import com.project.ecommerce.dto.order.OrderItem;
 import com.project.ecommerce.entity.item.ItemEntity;
 import com.project.ecommerce.entity.order.OrderEntity;
 import com.project.ecommerce.entity.order.OrderItemEntity;
-import com.project.ecommerce.entity.user.UserEntity;
 import com.project.ecommerce.model.CartModel;
 import com.project.ecommerce.repository.ItemRepository;
 import com.project.ecommerce.repository.OrderRepository;
