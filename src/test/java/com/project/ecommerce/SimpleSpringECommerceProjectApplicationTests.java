@@ -1,7 +1,6 @@
 package com.project.ecommerce;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.project.ecommerce.repository.RoleRepository;
@@ -15,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
 @SpringBootTest
@@ -32,7 +32,8 @@ class SimpleSpringECommerceProjectApplicationTests {
 
 	@Test
 	void shouldReturnDefaultMessage() throws Exception {
-		this.mockMvc.perform(get("/")).andExpect(status().is(302));
+		this.mockMvc.perform(get("/")).andExpect(status().is(302))
+				.andExpect(MockMvcResultMatchers.redirectedUrl("http://localhost/loginPage"));
 	}
 
 	@Test

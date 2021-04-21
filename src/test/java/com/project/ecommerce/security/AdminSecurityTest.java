@@ -1,4 +1,4 @@
-package com.project.ecommerce;
+package com.project.ecommerce.security;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

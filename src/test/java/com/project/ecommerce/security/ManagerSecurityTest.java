@@ -1,4 +1,5 @@
-package com.project.ecommerce;
+package com.project.ecommerce.security;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,32 +12,32 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class EmployeeSecurityTest {
+class ManagerSecurityTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     @WithMockUser(username = "shaw", authorities = {"ROLE_USER"})
-    void testUserWithEmployee() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/employeeDashboard")).andExpect(MockMvcResultMatchers.status().is(403));
+    void testUserWithManager() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/managerDashboard")).andExpect(MockMvcResultMatchers.status().is(403));
     }
 
     @Test
     @WithMockUser(username = "shaw", authorities = {"ROLE_MANAGER"})
-    void testManagerWithEmployee() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/employeeDashboard")).andExpect(MockMvcResultMatchers.status().is(403));
+    void testManagerWithManager() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/managerDashboard")).andExpect(MockMvcResultMatchers.status().is(200));
     }
 
     @Test
     @WithMockUser(username = "shaw", authorities = {"ROLE_EMPLOYEE"})
-    void testEmployeeWithEmployee() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/employeeDashboard")).andExpect(MockMvcResultMatchers.status().is(200));
+    void testEmployeeWithManager() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/managerDashboard")).andExpect(MockMvcResultMatchers.status().is(403));
     }
 
     @Test
     @WithMockUser(username = "shaw", authorities = {"ROLE_ADMIN"})
-    void testAdminWithEmployee() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/employeeDashboard")).andExpect(MockMvcResultMatchers.status().is(403));
+    void testAdminWithManager() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/managerDashboard")).andExpect(MockMvcResultMatchers.status().is(403));
     }
 }

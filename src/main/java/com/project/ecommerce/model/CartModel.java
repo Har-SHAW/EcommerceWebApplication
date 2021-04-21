@@ -20,7 +20,7 @@ public class CartModel {
 
     public void addItem(OrderItem orderItem){
         this.orderItems.add(orderItem);
-        this.totalPrice += orderItem.getItem().getItemPrice();
+        this.totalPrice += orderItem.getItem().getItemPrice()*orderItem.getQuantity();
     }
 
     public void removeItem(OrderItem orderItem){

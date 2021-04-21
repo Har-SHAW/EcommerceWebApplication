@@ -38,12 +38,10 @@ public class CartController extends InitBinderClass {
 
         model.addAttribute(ITEMS, cartService.getItemsList());
 
-        if (cartService.containsOrderItem(cartModel.getOrderItems(), itemIdLong)) {
-            return JspPages.DASH_BOARD;
+        if (!cartService.containsOrderItem(cartModel.getOrderItems(), itemIdLong)) {
+            cartModel.addItem(cartService.getOrderItem(Long.parseLong(itemId)));
+            model.addAttribute("cart",cartModel);
         }
-        cartModel.addItem(cartService.getOrderItem(Long.parseLong(itemId)));
-
-        model.addAttribute("cart",cartModel);
 
         return JspPages.DASH_BOARD;
     }
