@@ -71,12 +71,15 @@
 			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
 
+<<<<<<< HEAD
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
+=======
+>>>>>>> a0cf999139bca85f1a2edb2d5a6b47053aa9c111
 	</dependencies>
 
 	<build>
