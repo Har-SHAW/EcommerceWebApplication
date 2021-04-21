@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ public class UserController extends InitBinderClass {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/dashboard")
+    @GetMapping("/dashboard")
     public String getDashBoard(Model model,HttpServletRequest request){
         if (request.getSession().getAttribute("cart") == null){
             request.getSession().setAttribute("cart", new CartModel());
@@ -33,10 +34,10 @@ public class UserController extends InitBinderClass {
         return JspPages.DASH_BOARD;
     }
 
-    @RequestMapping("/placeOrder")
+    @GetMapping("/placeOrder")
     public String placeOrder(Model model,HttpServletRequest request){
 
-        CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
+        var cartModel = (CartModel) request.getSession().getAttribute("cart");
 
         if (cartModel.getOrderItems().isEmpty()){
             model.addAttribute("items", userService.getItemsList());
@@ -48,14 +49,14 @@ public class UserController extends InitBinderClass {
         return JspPages.SUCCESS_ORDER;
     }
 
-    @RequestMapping("/showOrders")
+    @GetMapping("/showOrders")
     public String showOrders(Model model, HttpServletRequest request){
 
         model.addAttribute("orders", userService.getOrdersOfUser());
         return JspPages.USER_ORDERS;
     }
 
-    @RequestMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest httpServletRequest){
         httpServletRequest.getSession().setAttribute("cart", null);
         SecurityContextHolder.getContext().setAuthentication(null);

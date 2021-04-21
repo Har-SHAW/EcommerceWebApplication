@@ -35,9 +35,9 @@ public class CartService {
     }
 
     public OrderItem getOrderItem(Long id){
-        ItemEntity itemEntity = itemRepository.getOne(id);
-        Item item = new Item(itemEntity);
-        OrderItem orderItem = new OrderItem();
+        var itemEntity = itemRepository.getOne(id);
+        var item = new Item(itemEntity);
+        var orderItem = new OrderItem();
         orderItem.setItem(item);
         orderItem.setQuantity(1);
         return orderItem;

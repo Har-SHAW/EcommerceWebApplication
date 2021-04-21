@@ -28,7 +28,7 @@ public class UserPrinciple extends UserEntity implements UserDetails {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         Set<RolesEntity> rolesEntities = user.getRolesEntities();
-        for (RolesEntity rolesEntity : rolesEntities){
+        for (var rolesEntity : rolesEntities){
             authorities.add(new SimpleGrantedAuthority(rolesEntity.getRole()));
         }
 

@@ -6,10 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderItem {
+public class OrderItem implements Serializable {
     private Integer quantity;
     private Item item;
 

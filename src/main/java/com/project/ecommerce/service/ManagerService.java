@@ -33,7 +33,7 @@ public class ManagerService {
     }
 
     public void editItem(Item item){
-        ItemEntity itemEntity = itemRepository.findById(item.getItemId()).orElse(null);
+        var itemEntity = itemRepository.findById(item.getItemId()).orElse(null);
         assert itemEntity != null;
         itemEntity.setItemName(item.getItemName());
         itemEntity.setItemPrice(item.getItemPrice());
@@ -45,14 +45,14 @@ public class ManagerService {
     }
 
     public void addItem(Item item){
-        ItemEntity itemEntity = new ItemEntity();
+        var itemEntity = new ItemEntity();
         itemEntity.setItemName(item.getItemName());
         itemEntity.setItemPrice(item.getItemPrice());
         itemRepository.save(itemEntity);
     }
 
     public void deleteItem(Long id){
-        ItemEntity itemEntity = itemRepository.findById(id).orElse(null);
+        var itemEntity = itemRepository.findById(id).orElse(null);
         assert itemEntity != null;
         itemRepository.delete(itemEntity);
     }

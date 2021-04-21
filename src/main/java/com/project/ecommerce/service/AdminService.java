@@ -33,8 +33,8 @@ public class AdminService {
     }
 
     public void changeRole(UserRole userRole){
-        RolesEntity rolesEntity = roleRepository.findById(userRole.getRole()).orElse(null);
-        UserEntity userEntity = userRepository.findById(userRole.getUsername()).orElse(null);
+        var rolesEntity = roleRepository.findById(userRole.getRole()).orElse(null);
+        var userEntity = userRepository.findById(userRole.getUsername()).orElse(null);
         assert userEntity != null;
         if (userRole.getAction().equals("Add")){
             userEntity.addRole(rolesEntity);

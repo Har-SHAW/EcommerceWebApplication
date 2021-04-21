@@ -4,12 +4,13 @@ import com.project.ecommerce.dto.order.OrderItem;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-public class CartModel {
+public class CartModel implements Serializable {
     private List<OrderItem> orderItems;
 
     private Double totalPrice;

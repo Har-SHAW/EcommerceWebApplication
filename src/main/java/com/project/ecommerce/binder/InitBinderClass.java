@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 public class InitBinderClass {
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
-        StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
+        var stringTrimmer = new StringTrimmerEditor(true);
         dataBinder.registerCustomEditor(String.class, stringTrimmer);
     }
 }

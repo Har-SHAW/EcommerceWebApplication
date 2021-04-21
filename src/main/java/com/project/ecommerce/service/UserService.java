@@ -58,13 +58,13 @@ public class UserService {
     }
 
     public void placeOrder(CartModel cartModel){
-        OrderEntity orderEntity = new OrderEntity();
+        var orderEntity = new OrderEntity();
 
         List<OrderItem> orderItems = cartModel.getOrderItems();
 
         for (OrderItem orderItem : orderItems){
-            OrderItemEntity orderItemEntity = new OrderItemEntity();
-            ItemEntity itemEntity = itemRepository.findById(orderItem.getItem().getItemId()).orElse(null);
+            var orderItemEntity = new OrderItemEntity();
+            var itemEntity = itemRepository.findById(orderItem.getItem().getItemId()).orElse(null);
             orderItemEntity.setItemEntity(itemEntity);
             orderItemEntity.setQuantity(orderItem.getQuantity());
             orderItemEntity.setOrderEntity(orderEntity);
@@ -72,7 +72,7 @@ public class UserService {
             orderEntity.addOrderItem(orderItemEntity);
         }
 
-        UserEntity userEntity = userRepository.findById(getUsernameFromAuth()).orElse(null);
+        var userEntity = userRepository.findById(getUsernameFromAuth()).orElse(null);
 
         orderEntity.setUserEntity(userEntity);
 
@@ -82,14 +82,14 @@ public class UserService {
     }
 
     public List<Order> getOrdersOfUser(){
-        UserEntity userEntity = userRepository.findById(getUsernameFromAuth()).orElse(null);
+        var userEntity = userRepository.findById(getUsernameFromAuth()).orElse(null);
         assert userEntity != null;
 
         List<OrderEntity> orderEntities = userEntity.getOrderEntities();
 
         List<Order> orders = new ArrayList<>();
 
-        for (OrderEntity orderEntity : orderEntities){
+        for (var orderEntity : orderEntities){
             orders.add(new Order(orderEntity));
         }
 

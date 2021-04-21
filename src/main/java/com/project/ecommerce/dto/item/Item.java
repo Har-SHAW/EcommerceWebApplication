@@ -4,11 +4,12 @@ import com.project.ecommerce.entity.item.ItemEntity;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class Item {
+public class Item implements Serializable {
     private Long itemId;
     @NotNull(message = "is required")
     private String itemName;

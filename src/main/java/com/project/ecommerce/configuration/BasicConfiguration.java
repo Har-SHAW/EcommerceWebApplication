@@ -10,14 +10,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class BasicConfiguration {
     @Bean("messageSource")
     public MessageSource messageSource(){
-        ResourceBundleMessageSource resource = new ResourceBundleMessageSource();
+        var resource = new ResourceBundleMessageSource();
         resource.setBasename("messages");
         return resource;
     }
 
     @Bean
     public InternalResourceViewResolver internalResource() {
-        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+        var internalResourceViewResolver = new InternalResourceViewResolver();
         internalResourceViewResolver.setPrefix("/WEB-INF/view/");
         internalResourceViewResolver.setSuffix(".jsp");
         return internalResourceViewResolver;

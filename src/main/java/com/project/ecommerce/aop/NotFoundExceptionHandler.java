@@ -20,7 +20,6 @@ public class NotFoundExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public String getErrorPage(Exception exception){
-        exception.printStackTrace();
         return JspPages.ERROR_PAGE;
     }
 }

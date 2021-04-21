@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,7 @@ public class AdminController extends InitBinderClass {
     private static final String USERS = "users";
     private static final String USER_ROLE = "userRole";
 
-    @RequestMapping("/showUsers")
+    @GetMapping("/showUsers")
     public String showUsers(Model model){
 
         model.addAttribute(USERS, adminService.getAllUsers());
@@ -34,7 +35,7 @@ public class AdminController extends InitBinderClass {
         return JspPages.ADMIN_USERS;
     }
 
-    @RequestMapping("/changeRole")
+    @GetMapping("/changeRole")
     public String addRoleToUser(@Valid @ModelAttribute("userRole") UserRole userRole, BindingResult bindingResult, Model model){
 
         if (!bindingResult.hasErrors() && !adminService.isValidRole(userRole.getRole())){
@@ -51,7 +52,7 @@ public class AdminController extends InitBinderClass {
         return JspPages.ADMIN_USERS;
     }
 
-    @RequestMapping("/deleteUser")
+    @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("username") String username, Model model){
         adminService.deleteUser(username);
         model.addAttribute(USERS, adminService.getAllUsers());

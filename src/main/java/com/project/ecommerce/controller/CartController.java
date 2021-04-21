@@ -9,6 +9,7 @@ import com.project.ecommerce.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,14 +24,14 @@ public class CartController extends InitBinderClass {
 
     public static final String ITEMS="items";
 
-    @RequestMapping("/addItem")
+    @GetMapping("/addItem")
     public String addItem(@RequestParam(name = "itemId") String itemId,
                           Model model,
                           HttpServletRequest request
     ){
 
         Long itemIdLong = Long.parseLong(itemId);
-        CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
+        var cartModel = (CartModel) request.getSession().getAttribute("cart");
 
         if (cartModel == null){
             throw new CartNotInitialisedException();
@@ -46,12 +47,12 @@ public class CartController extends InitBinderClass {
         return JspPages.DASH_BOARD;
     }
 
-    @RequestMapping("/incrementItem")
+    @GetMapping("/incrementItem")
     public String incrementItem(@RequestParam(name = "itemId") String itemId,
                                 Model model,
                                 HttpServletRequest request){
         Long itemIdLong = Long.parseLong(itemId);
-        CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
+        var cartModel = (CartModel) request.getSession().getAttribute("cart");
 
         if (cartModel == null){
             throw new CartNotInitialisedException();
@@ -68,19 +69,19 @@ public class CartController extends InitBinderClass {
         return JspPages.DASH_BOARD;
     }
 
-    @RequestMapping("/decrementItem")
+    @GetMapping("/decrementItem")
     public String decrementItem(@RequestParam(name = "itemId") String itemId,
                                 Model model,
                                 HttpServletRequest request){
 
         Long itemIdLong = Long.parseLong(itemId);
-        CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
+        var cartModel = (CartModel) request.getSession().getAttribute("cart");
 
         if (cartModel == null){
             throw new CartNotInitialisedException();
         }
 
-        OrderItem orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
+        var orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
 
         if (orderItem.getQuantity() > 1) {
             orderItem.setQuantity(orderItem.getQuantity() - 1);
@@ -93,18 +94,18 @@ public class CartController extends InitBinderClass {
         return JspPages.DASH_BOARD;
     }
 
-    @RequestMapping("/deleteItem")
+    @GetMapping("/deleteItem")
     public String deleteItem(@RequestParam(name = "itemId") String itemId,
                              Model model,
                              HttpServletRequest request){
         Long itemIdLong = Long.parseLong(itemId);
-        CartModel cartModel = (CartModel) request.getSession().getAttribute("cart");
+        var cartModel = (CartModel) request.getSession().getAttribute("cart");
 
         if (cartModel == null){
             throw new CartNotInitialisedException();
         }
 
-        OrderItem orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
+        var orderItem = cartService.findOrderItem(cartModel.getOrderItems(), itemIdLong);
 
         cartModel.removeItem(orderItem);
 
