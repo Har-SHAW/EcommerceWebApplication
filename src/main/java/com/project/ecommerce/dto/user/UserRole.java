@@ -1,6 +1,5 @@
 package com.project.ecommerce.dto.user;
 
-import com.project.ecommerce.validation.ValidUsername;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +11,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class UserRole {
     @NotNull(message = "is required")
-    @ValidUsername
     private String username;
 
     @NotNull(message = "is required")

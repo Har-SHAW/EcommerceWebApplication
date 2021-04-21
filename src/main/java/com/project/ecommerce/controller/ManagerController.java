@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -37,7 +34,7 @@ public class ManagerController extends InitBinderClass {
         return JspPages.EDIT_ITEM;
     }
 
-    @GetMapping("/processEdit")
+    @PostMapping("/processEdit")
     public String processEdit(@Valid @ModelAttribute("item") Item item, BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()){
@@ -51,7 +48,7 @@ public class ManagerController extends InitBinderClass {
         return JspPages.MANAGER_ITEMS;
     }
 
-    @GetMapping("/processAdd")
+    @PostMapping("/processAdd")
     public String processAdd(@Valid @ModelAttribute("item") Item item, BindingResult bindingResult, Model model){
 
         if (managerService.findByName(item.getItemName()) != null){

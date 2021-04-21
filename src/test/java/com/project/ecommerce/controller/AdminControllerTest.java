@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -32,12 +33,13 @@ class AdminControllerTest {
 
     @Test
     void testValidationChangeRole() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/adminDashboard/changeRole")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/adminDashboard/changeRole")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("username", "")
                 .param("role", "")
                 .param("action", "")
                 .sessionAttr("userRole", new UserRole())
+                .with(SecurityMockMvcRequestPostProcessors.csrf())
         )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("admin-users"))
@@ -52,12 +54,13 @@ class AdminControllerTest {
 
     @Test
     void testChangeAopRole() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/adminDashboard/changeRole")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/adminDashboard/changeRole")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("username", "shaw")
                 .param("role", "user")
                 .param("action", "Add")
                 .sessionAttr("userRole", new UserRole())
+                .with(SecurityMockMvcRequestPostProcessors.csrf())
         )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("admin-users"))
@@ -68,12 +71,13 @@ class AdminControllerTest {
     @Test
     void testRoleValidationChangeRole() throws Exception {
         Mockito.when(adminService.isValidRole("ROLE_USER")).thenReturn(false);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/adminDashboard/changeRole")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/adminDashboard/changeRole")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("username", "shaw")
                 .param("role", "user")
                 .param("action", "Add")
                 .sessionAttr("userRole", new UserRole())
+                .with(SecurityMockMvcRequestPostProcessors.csrf())
         )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("admin-users"))
@@ -88,12 +92,13 @@ class AdminControllerTest {
     @Test
     void testSuccessCases() throws Exception {
         Mockito.when(adminService.isValidRole("ROLE_USER")).thenReturn(true);
-         this.mockMvc.perform(MockMvcRequestBuilders.get("/adminDashboard/changeRole")
+         this.mockMvc.perform(MockMvcRequestBuilders.post("/adminDashboard/changeRole")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("username", "shaw")
                 .param("role", "user")
                 .param("action", "Add")
                 .sessionAttr("userRole", new UserRole())
+                 .with(SecurityMockMvcRequestPostProcessors.csrf())
         )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("admin-users"))

@@ -1,7 +1,6 @@
 package com.project.ecommerce.dto.user;
 
 import com.project.ecommerce.validation.OnlyGMail;
-import com.project.ecommerce.validation.UniqueUsername;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +11,6 @@ import javax.validation.constraints.*;
 @Setter
 @NoArgsConstructor
 public class UserSignup {
-    @UniqueUsername
     @NotNull(message = "is required")
     @Size(min = 4, message = "Minimum 4 characters")
     private String username;

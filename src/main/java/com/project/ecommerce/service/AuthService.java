@@ -39,4 +39,8 @@ public class AuthService {
 
         userRepository.save(userEntity);
     }
+
+    public boolean userExist(String username){
+        return userRepository.existsById(username);
+    }
 }

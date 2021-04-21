@@ -15,6 +15,7 @@ public class CartService {
 
     @Autowired
     ItemRepository itemRepository;
+
     public boolean containsOrderItem(final List<OrderItem> list, final Long id){
         return list.stream().anyMatch(o -> o.getItem().getItemId().equals(id));
     }
@@ -30,7 +31,6 @@ public class CartService {
         for (ItemEntity itemEntity : itemEntities){
             items.add(new Item(itemEntity));
         }
-
         return items;
     }
 

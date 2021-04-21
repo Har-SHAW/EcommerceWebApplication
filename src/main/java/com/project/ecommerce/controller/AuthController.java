@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -28,8 +25,11 @@ public class AuthController extends InitBinderClass {
         return JspPages.SIGN_UP;
     }
 
-    @PostMapping("/processSignup")
+    @PostMapping(value = "/processSignup")
     public String processSignUp(@Valid @ModelAttribute("user") UserSignup theUser, BindingResult bindingResult, Model model){
+        if (theUser.getUsername()!=null && authService.userExist(theUser.getUsername())){
+            bindingResult.rejectValue("username", "error.username", "Username already taken");
+        }
         if (theUser.getConfirmPassword()!=null && !theUser.getPassword().equals(theUser.getConfirmPassword())){
             bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "Password not matched");
         }

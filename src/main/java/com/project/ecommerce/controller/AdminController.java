@@ -4,14 +4,12 @@ import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.user.UserRole;
 import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.service.AdminService;
+import com.project.ecommerce.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -21,6 +19,9 @@ public class AdminController extends InitBinderClass {
 
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    AuthService authService;
 
     private static final String USERS = "users";
     private static final String USER_ROLE = "userRole";
@@ -35,8 +36,12 @@ public class AdminController extends InitBinderClass {
         return JspPages.ADMIN_USERS;
     }
 
-    @GetMapping("/changeRole")
+    @PostMapping("/changeRole")
     public String addRoleToUser(@Valid @ModelAttribute("userRole") UserRole userRole, BindingResult bindingResult, Model model){
+
+        if (!bindingResult.hasErrors() && !authService.userExist(userRole.getUsername())){
+            bindingResult.rejectValue("username", "error.username", "No such user");
+        }
 
         if (!bindingResult.hasErrors() && !adminService.isValidRole(userRole.getRole())){
             bindingResult.rejectValue("role", "error.role", "No such role");
