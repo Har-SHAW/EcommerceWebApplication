@@ -39,7 +39,10 @@ public class CartController extends InitBinderClass {
         model.addAttribute(ITEMS, cartService.getItemsList());
 
         if (!cartService.containsOrderItem(cartModel.getOrderItems(), itemIdLong)) {
-            cartModel.addItem(cartService.getOrderItem(Long.parseLong(itemId)));
+            var orderItem = cartService.getOrderItem(Long.parseLong(itemId));
+            if (orderItem.getItem().getIsOutOfStock().equals(Boolean.FALSE)){
+                cartModel.addItem(cartService.getOrderItem(Long.parseLong(itemId)));
+            }
             model.addAttribute("cart",cartModel);
         }
 

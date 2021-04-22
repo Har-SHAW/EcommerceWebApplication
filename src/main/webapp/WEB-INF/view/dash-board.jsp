@@ -119,6 +119,19 @@
                .itemConTxt{
                text-align: left;
                }
+               .outOfStock{
+               text-align: center;
+                              transition: 0.25s;
+                              width: 150px;
+                              padding: 10px;
+                              outline: none;
+                              border-radius: 24px;
+                              border: 1px solid #436576;
+                              font-weight: bold;
+                background: white;
+                        color: #436576;
+                               cursor: pointer;
+               }
                .redInputButton {
                                            text-align: center;
                                            transition: 0.25s;
@@ -166,7 +179,12 @@
                            <div>Price: ${item.itemPrice}</div>
                         </div>
                         <div class="ItemConBut">
-                           <button onclick="location.href='addItem?itemId=${item.itemId}'" type="button" class="inputButton">Add to Cart</button>
+                        <c:if test="${item.isOutOfStock == false}">
+                               <button onclick="location.href='addItem?itemId=${item.itemId}'" type="button" class="inputButton">Add to Cart</button>
+                        </c:if>
+                        <c:if test="${item.isOutOfStock == true}">
+                               <button onclick="location.href='addItem?itemId=${item.itemId}'" type="button" class="outOfStock" disabled>Out Of Stock</button>
+                         </c:if>
                         </div>
                      </div>
                   </div>

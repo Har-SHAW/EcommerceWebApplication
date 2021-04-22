@@ -3,7 +3,6 @@ package com.project.ecommerce.user_service;
 import com.project.ecommerce.entity.user.RolesEntity;
 import com.project.ecommerce.entity.user.UserEntity;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,10 +12,9 @@ import java.util.List;
 import java.util.Set;
 
 @Getter
-@Setter
 public class UserPrinciple extends UserEntity implements UserDetails {
 
-    private List<GrantedAuthority> authorities;
+    private final List<GrantedAuthority> authorities;
 
     public UserPrinciple(String username, String password, List<GrantedAuthority> authorities, Boolean isEnabled) {
         this.username = username;

@@ -19,6 +19,7 @@ class UserPrincipleTest {
         userEntity.addRole(rolesEntity);
         userEntity.setIsEnabled(true);
         UserPrinciple userPrinciple = UserPrinciple.build(userEntity);
+        Assertions.assertThat(userPrinciple).isOfAnyClassIn(UserPrinciple.class);
         Assertions.assertThat(userPrinciple.isAccountNonExpired()).isTrue();
         Assertions.assertThat(userPrinciple.isEnabled()).isTrue();
         Assertions.assertThat(userPrinciple.isAccountNonLocked()).isTrue();

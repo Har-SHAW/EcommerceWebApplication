@@ -58,8 +58,18 @@ class ManagerServiceTest {
     }
 
     @Test
-    void testDeleteItem(){
-        managerService.deleteItem(1L);
-        Mockito.verify(itemRepository, Mockito.times(1)).deleteById(1L);
+    void testDisableItem(){
+        Mockito.when(itemRepository.getOne(1L)).thenReturn(new ItemEntity());
+        managerService.setNoStock(1L);
+        Mockito.verify(itemRepository, Mockito.times(1)).getOne(1L);
+        Mockito.verify(itemRepository, Mockito.times(1)).save(Mockito.any(ItemEntity.class));
+    }
+
+    @Test
+    void testEnableItem(){
+        Mockito.when(itemRepository.getOne(1L)).thenReturn(new ItemEntity());
+        managerService.setInStock(1L);
+        Mockito.verify(itemRepository, Mockito.times(1)).getOne(1L);
+        Mockito.verify(itemRepository, Mockito.times(1)).save(Mockito.any(ItemEntity.class));
     }
 }

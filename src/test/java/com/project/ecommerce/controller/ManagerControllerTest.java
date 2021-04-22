@@ -120,8 +120,8 @@ class ManagerControllerTest {
     }
 
     @Test
-    void testDeleteItem() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/managerDashboard/deleteItem")
+    void testNoStockItem() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/managerDashboard/noStock")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("itemId", "1")
                 .with(SecurityMockMvcRequestPostProcessors.csrf())
@@ -131,7 +131,23 @@ class ManagerControllerTest {
                 .andExpect(MockMvcResultMatchers.forwardedUrl("/WEB-INF/view/manager-items.jsp"))
                 .andExpect(MockMvcResultMatchers.model().attributeHasNoErrors());
 
-        Mockito.verify(managerService, Mockito.times(1)).deleteItem(1L);
+        Mockito.verify(managerService, Mockito.times(1)).setNoStock(1L);
+        Mockito.verify(managerService, Mockito.times(1)).getAllItems();
+    }
+
+    @Test
+    void testInStockItem() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/managerDashboard/inStock")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("itemId", "1")
+                .with(SecurityMockMvcRequestPostProcessors.csrf())
+        )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("manager-items"))
+                .andExpect(MockMvcResultMatchers.forwardedUrl("/WEB-INF/view/manager-items.jsp"))
+                .andExpect(MockMvcResultMatchers.model().attributeHasNoErrors());
+
+        Mockito.verify(managerService, Mockito.times(1)).setInStock(1L);
         Mockito.verify(managerService, Mockito.times(1)).getAllItems();
     }
 }
