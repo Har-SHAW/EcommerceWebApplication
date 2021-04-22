@@ -17,6 +17,7 @@ class UserPrincipleTest {
         RolesEntity rolesEntity = new RolesEntity();
         rolesEntity.setRole("ROLE_ADMIN");
         userEntity.addRole(rolesEntity);
+        userEntity.setIsEnabled(true);
         UserPrinciple userPrinciple = UserPrinciple.build(userEntity);
         Assertions.assertThat(userPrinciple.isAccountNonExpired()).isTrue();
         Assertions.assertThat(userPrinciple.isEnabled()).isTrue();

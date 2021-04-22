@@ -43,13 +43,13 @@ public class AdminService {
     }
 
     public void disableUser(String username){
-        UserEntity userEntity = userRepository.getOne(username);
+        var userEntity = userRepository.getOne(username);
         userEntity.setIsEnabled(false);
         userRepository.save(userEntity);
     }
 
     public void enableUser(String username){
-        UserEntity userEntity = userRepository.getOne(username);
+        var userEntity = userRepository.getOne(username);
         userEntity.setIsEnabled(true);
         userRepository.save(userEntity);
     }

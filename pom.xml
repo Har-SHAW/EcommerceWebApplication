@@ -22,7 +22,7 @@
 			**/dto/**,
 			**/jsp_pages/**,
 			**/entity/**,
-			**/spec/api.json
+			**/SimpleSpringECommerceProjectApplication.java
 		</sonar.exclusions>
 	</properties>
 

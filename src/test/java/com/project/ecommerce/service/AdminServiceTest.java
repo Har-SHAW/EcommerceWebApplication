@@ -27,9 +27,19 @@ class AdminServiceTest {
     AdminService adminService;
 
     @Test
-    void testDelete(){
+    void testDisable(){
+        Mockito.when(userRepository.getOne("shaw")).thenReturn(new UserEntity());
         adminService.disableUser("shaw");
-        Mockito.verify(userRepository, Mockito.times(1)).deleteById("shaw");
+        Mockito.verify(userRepository, Mockito.times(1)).save(Mockito.any(UserEntity.class));
+        Mockito.verify(userRepository, Mockito.times(1)).getOne("shaw");
+    }
+
+    @Test
+    void testEnable(){
+        Mockito.when(userRepository.getOne("shaw")).thenReturn(new UserEntity());
+        adminService.enableUser("shaw");
+        Mockito.verify(userRepository, Mockito.times(1)).save(Mockito.any(UserEntity.class));
+        Mockito.verify(userRepository, Mockito.times(1)).getOne("shaw");
     }
 
     @Test
