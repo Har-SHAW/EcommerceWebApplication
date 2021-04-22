@@ -15,10 +15,12 @@ public class Item implements Serializable {
     private String itemName;
     @NotNull(message = "is required")
     private Double itemPrice;
+    private Boolean isOutOfStock;
 
     public Item(ItemEntity itemEntity){
         this.setItemId(itemEntity.getItemId());
         this.setItemName(itemEntity.getItemName());
         this.setItemPrice(itemEntity.getItemPrice());
+        this.setIsOutOfStock(itemEntity.getIsOutOfStock());
     }
 }

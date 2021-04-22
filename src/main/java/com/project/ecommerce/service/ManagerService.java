@@ -46,10 +46,19 @@ public class ManagerService {
         var itemEntity = new ItemEntity();
         itemEntity.setItemName(item.getItemName());
         itemEntity.setItemPrice(item.getItemPrice());
+        itemEntity.setIsOutOfStock(false);
         itemRepository.save(itemEntity);
     }
 
-    public void deleteItem(Long id){
-        itemRepository.deleteById(id);
+    public void setInStock(Long id){
+        var itemEntity = itemRepository.getOne(id);
+        itemEntity.setIsOutOfStock(false);
+        itemRepository.save(itemEntity);
+    }
+
+    public void setNoStock(Long id){
+        var itemEntity = itemRepository.getOne(id);
+        itemEntity.setIsOutOfStock(true);
+        itemRepository.save(itemEntity);
     }
 }

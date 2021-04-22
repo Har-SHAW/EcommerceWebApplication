@@ -119,4 +119,52 @@ class AdminControllerTest {
         Mockito.verify(adminService, Mockito.times(1)).getAllUsers();
         Mockito.verifyNoMoreInteractions(adminService);
     }
+
+    @Test
+    void testDisableOwnUser() throws Exception {
+        Mockito.when(adminService.getAllUsers()).thenReturn(new ArrayList<>());
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/adminDashboard/disableUser")
+                .param("username", "shaw")
+        )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("admin-users"))
+                .andExpect(MockMvcResultMatchers.forwardedUrl("/WEB-INF/view/admin-users.jsp"));
+
+
+        Mockito.verify(adminService, Mockito.times(1)).getAllUsers();
+        Mockito.verifyNoMoreInteractions(adminService);
+    }
+
+    @Test
+    void testDisableUser() throws Exception {
+        Mockito.when(adminService.getAllUsers()).thenReturn(new ArrayList<>());
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/adminDashboard/disableUser")
+                .param("username", "shady")
+        )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("admin-users"))
+                .andExpect(MockMvcResultMatchers.forwardedUrl("/WEB-INF/view/admin-users.jsp"));
+
+
+        Mockito.verify(adminService, Mockito.times(1)).disableUser("shady");
+        Mockito.verify(adminService, Mockito.times(1)).getAllUsers();
+        Mockito.verifyNoMoreInteractions(adminService);
+    }
+
+
+
+    @Test
+    void testEnableUser() throws Exception {
+        Mockito.when(adminService.getAllUsers()).thenReturn(new ArrayList<>());
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/adminDashboard/enableUser")
+                .param("username", "shaw")
+        )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("admin-users"))
+                .andExpect(MockMvcResultMatchers.forwardedUrl("/WEB-INF/view/admin-users.jsp"));
+
+        Mockito.verify(adminService, Mockito.times(1)).enableUser("shaw");
+        Mockito.verify(adminService, Mockito.times(1)).getAllUsers();
+        Mockito.verifyNoMoreInteractions(adminService);
+    }
 }

@@ -64,9 +64,18 @@ public class ManagerController extends InitBinderClass {
         return JspPages.MANAGER_ITEMS;
     }
 
-    @GetMapping("/deleteItem")
-    public String deleteItem(@RequestParam("itemId") String itemId, Model model){
-        managerService.deleteItem(Long.parseLong(itemId));
+    @GetMapping("/inStock")
+    public String inStockItem(@RequestParam("itemId") String itemId, Model model){
+        managerService.setInStock(Long.parseLong(itemId));
+        model.addAttribute("item", new Item());
+        model.addAttribute(CartController.ITEMS, managerService.getAllItems());
+        return JspPages.MANAGER_ITEMS;
+    }
+
+    @GetMapping("/noStock")
+    public String noStockItem(@RequestParam("itemId") String itemId, Model model){
+        managerService.setNoStock(Long.parseLong(itemId));
+        model.addAttribute("item", new Item());
         model.addAttribute(CartController.ITEMS, managerService.getAllItems());
         return JspPages.MANAGER_ITEMS;
     }

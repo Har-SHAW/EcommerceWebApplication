@@ -88,7 +88,7 @@
             display: none;
             }
             .imgCart{
-                                 height: 5vw;
+                                 height: 6vw;
                                  width: 100%;
                                  background: lightgrey;
                                  border-radius: 20px;
@@ -178,6 +178,12 @@ align-items: center;
     <div>${item.itemPrice}</div>
     </div>
     <button onclick="location.href='editItem?itemId=${item.itemId}'" style="width: 100%" type="button">EDIT</button>
+    <c:if test="${item.isOutOfStock == true}">
+        <button onclick="location.href='inStock?itemId=${item.itemId}'" style="width: 100%" type="button">Set in Stock</button>
+    </c:if>
+    <c:if test="${item.isOutOfStock == false}">
+        <button onclick="location.href='noStock?itemId=${item.itemId}'" style="width: 100%" type="button">Set no Stock</button>
+    </c:if>
     </div>
     </div>
     </div>

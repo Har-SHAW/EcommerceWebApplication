@@ -18,10 +18,12 @@ public class ItemEntity {
     private Long itemId;
     private String itemName;
     private Double itemPrice;
+    private Boolean isOutOfStock;
 
     public void copyFromDTO(Item item){
         this.setItemName(item.getItemName());
         this.setItemId(item.getItemId());
         this.setItemPrice(item.getItemPrice());
+        this.setIsOutOfStock(item.getIsOutOfStock());
     }
 }
