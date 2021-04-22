@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class ManagerService {
@@ -29,12 +28,11 @@ public class ManagerService {
     }
 
     public Item getItemById(Long id){
-        return new Item(Objects.requireNonNull(itemRepository.findById(id).orElse(null)));
+        return new Item(itemRepository.getOne(id));
     }
 
     public void editItem(Item item){
-        var itemEntity = itemRepository.findById(item.getItemId()).orElse(null);
-        assert itemEntity != null;
+        var itemEntity = itemRepository.getOne(item.getItemId());
         itemEntity.setItemName(item.getItemName());
         itemEntity.setItemPrice(item.getItemPrice());
         itemRepository.save(itemEntity);
@@ -52,8 +50,6 @@ public class ManagerService {
     }
 
     public void deleteItem(Long id){
-        var itemEntity = itemRepository.findById(id).orElse(null);
-        assert itemEntity != null;
-        itemRepository.delete(itemEntity);
+        itemRepository.deleteById(id);
     }
 }

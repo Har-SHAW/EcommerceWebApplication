@@ -21,7 +21,8 @@
 		<sonar.exclusions>
 			**/dto/**,
 			**/jsp_pages/**,
-			**/entity/**
+			**/entity/**,
+			**/spec/api.json
 		</sonar.exclusions>
 	</properties>
 

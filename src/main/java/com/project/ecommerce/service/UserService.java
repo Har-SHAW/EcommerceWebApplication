@@ -71,7 +71,7 @@ public class UserService {
             orderEntity.addOrderItem(orderItemEntity);
         }
 
-        var userEntity = userRepository.findById(getUsernameFromAuth()).orElse(null);
+        var userEntity = userRepository.getOne(getUsernameFromAuth());
 
         orderEntity.setUserEntity(userEntity);
 
@@ -81,8 +81,8 @@ public class UserService {
     }
 
     public List<Order> getOrdersOfUser(){
-        var userEntity = userRepository.findById(getUsernameFromAuth()).orElse(null);
-        assert userEntity != null;
+
+        var userEntity = userRepository.getOne(getUsernameFromAuth());
 
         List<OrderEntity> orderEntities = userEntity.getOrderEntities();
 

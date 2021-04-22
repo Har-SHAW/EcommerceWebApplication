@@ -1,6 +1,7 @@
 package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
+import com.project.ecommerce.exceptions.CartNotInitialisedException;
 import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.model.CartModel;
 import com.project.ecommerce.service.UserService;
@@ -38,6 +39,10 @@ public class UserController extends InitBinderClass {
     public String placeOrder(Model model,HttpServletRequest request){
 
         var cartModel = (CartModel) request.getSession().getAttribute("cart");
+
+        if (cartModel == null){
+            throw new CartNotInitialisedException();
+        }
 
         if (cartModel.getOrderItems().isEmpty()){
             model.addAttribute("items", userService.getItemsList());
