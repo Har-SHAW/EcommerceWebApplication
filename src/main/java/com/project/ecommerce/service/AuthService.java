@@ -32,6 +32,7 @@ public class AuthService {
         userDetailsEntity.setPhoneNo(theUser.getPhoneNo());
 
         userEntity.setUserDetailsEntity(userDetailsEntity);
+        userEntity.setIsEnabled(true);
 
         var rolesEntity = roleRepository.getOne("ROLE_USER");
 

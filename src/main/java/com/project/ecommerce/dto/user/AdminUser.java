@@ -18,6 +18,7 @@ public class AdminUser {
     private String email;
     private String phoneNo;
     private Integer age;
+    private Boolean isEnabled;
 
     public AdminUser(UserEntity userEntity){
         this.username = userEntity.getUsername();
@@ -30,5 +31,6 @@ public class AdminUser {
         this.email = userEntity.getUserDetailsEntity().getEmail();
         this.phoneNo = userEntity.getUserDetailsEntity().getPhoneNo();
         this.age = userEntity.getUserDetailsEntity().getAge();
+        this.isEnabled = userEntity.getIsEnabled();
     }
 }

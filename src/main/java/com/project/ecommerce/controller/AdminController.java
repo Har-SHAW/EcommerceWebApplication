@@ -5,6 +5,7 @@ import com.project.ecommerce.dto.user.UserRole;
 import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.service.AdminService;
 import com.project.ecommerce.service.AuthService;
+import com.project.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ public class AdminController extends InitBinderClass {
 
     @Autowired
     AuthService authService;
+
+    @Autowired
+    UserService userService;
 
     private static final String USERS = "users";
     private static final String USER_ROLE = "userRole";
@@ -57,9 +61,19 @@ public class AdminController extends InitBinderClass {
         return JspPages.ADMIN_USERS;
     }
 
-    @GetMapping("/deleteUser")
-    public String deleteUser(@RequestParam("username") String username, Model model){
-        adminService.deleteUser(username);
+    @GetMapping("/disableUser")
+    public String disableUser(@RequestParam("username") String username, Model model){
+        if (!userService.getUsernameFromAuth().equals(username)) {
+            adminService.disableUser(username);
+        }
+        model.addAttribute(USERS, adminService.getAllUsers());
+        model.addAttribute(USER_ROLE, new UserRole());
+        return JspPages.ADMIN_USERS;
+    }
+
+    @GetMapping("/enableUser")
+    public String enableUser(@RequestParam("username") String username, Model model){
+        adminService.enableUser(username);
         model.addAttribute(USERS, adminService.getAllUsers());
         model.addAttribute(USER_ROLE, new UserRole());
         return JspPages.ADMIN_USERS;

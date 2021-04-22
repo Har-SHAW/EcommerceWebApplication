@@ -21,6 +21,8 @@ public class UserEntity {
 
     protected String password;
 
+    protected Boolean isEnabled;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id")
     protected UserDetailsEntity userDetailsEntity;

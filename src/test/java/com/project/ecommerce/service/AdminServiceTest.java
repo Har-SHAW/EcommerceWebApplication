@@ -28,7 +28,7 @@ class AdminServiceTest {
 
     @Test
     void testDelete(){
-        adminService.deleteUser("shaw");
+        adminService.disableUser("shaw");
         Mockito.verify(userRepository, Mockito.times(1)).deleteById("shaw");
     }
 

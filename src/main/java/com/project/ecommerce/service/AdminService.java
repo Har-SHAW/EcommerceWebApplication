@@ -42,8 +42,16 @@ public class AdminService {
         userRepository.save(userEntity);
     }
 
-    public void deleteUser(String username){
-        userRepository.deleteById(username);
+    public void disableUser(String username){
+        UserEntity userEntity = userRepository.getOne(username);
+        userEntity.setIsEnabled(false);
+        userRepository.save(userEntity);
+    }
+
+    public void enableUser(String username){
+        UserEntity userEntity = userRepository.getOne(username);
+        userEntity.setIsEnabled(true);
+        userRepository.save(userEntity);
     }
 
     public boolean isValidRole(String role){

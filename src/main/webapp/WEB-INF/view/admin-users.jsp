@@ -123,6 +123,22 @@ align-items: center;
                    color: #D2042D;
                    cursor: pointer;
                    }
+                   .enableInputButton {
+                                      text-align: center;
+                                      transition: 0.25s;
+                                      padding: 5px 10px;
+                                      outline: none;
+                                      border-radius: 24px;
+                                      border: 1px solid #436576;
+                                      background: #436576;
+                                      color: white;
+                                      font-weight: bold;
+                                      }
+                                      .enableInputButton:hover {
+                                      background: white;
+                                      color: #436576;
+                                      cursor: pointer;
+                                      }
 </style>
 </head>
 <body>
@@ -149,7 +165,12 @@ align-items: center;
     </select>
     <br>
     <br>
-    <button onclick="location.href='deleteUser?username=${user.username}'" type="button" class="redInputButton">DELETE USER</button>
+    <c:if test="${user.isEnabled == true}">
+    <button onclick="location.href='disableUser?username=${user.username}'" type="button" class="redInputButton">DISABLE USER</button>
+    </c:if>
+    <c:if test="${user.isEnabled == false}">
+        <button onclick="location.href='enableUser?username=${user.username}'" type="button" class="enableInputButton">ENABLE USER</button>
+        </c:if>
     </div>
     </div>
     </div>

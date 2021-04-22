@@ -18,8 +18,10 @@ public class ValidRoleMaker extends InitBinderClass {
             if (object instanceof UserRole){
                 var userRole = (UserRole) object;
                 String role = userRole.getRole();
-                if (role!=null && !role.contains("_")) {
-                    role = "ROLE_" + role;
+                if (role!=null) {
+                    if (!role.contains("_")){
+                        role = "ROLE_" + role;
+                    }
                     role = role.toUpperCase();
                 }
                 userRole.setRole(role);

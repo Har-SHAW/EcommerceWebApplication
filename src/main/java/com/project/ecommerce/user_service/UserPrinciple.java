@@ -18,10 +18,11 @@ public class UserPrinciple extends UserEntity implements UserDetails {
 
     private List<GrantedAuthority> authorities;
 
-    public UserPrinciple(String username, String password, List<GrantedAuthority> authorities) {
+    public UserPrinciple(String username, String password, List<GrantedAuthority> authorities, Boolean isEnabled) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
+        this.isEnabled = isEnabled;
     }
 
     public static UserPrinciple build(UserEntity user) {
@@ -35,7 +36,8 @@ public class UserPrinciple extends UserEntity implements UserDetails {
         return new UserPrinciple(
                 user.getUsername(),
                 user.getPassword(),
-                authorities
+                authorities,
+                user.getIsEnabled()
         );
     }
 
@@ -71,6 +73,6 @@ public class UserPrinciple extends UserEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.isEnabled;
     }
 }
