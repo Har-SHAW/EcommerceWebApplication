@@ -1,6 +1,6 @@
 package com.project.ecommerce.controller;
 
-import com.project.ecommerce.service.EmployeeService;
+import com.project.ecommerce.service_implementation.EmployeeServiceImplementation;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 class EmployeeControllerTest {
 
     @MockBean
-    EmployeeService employeeService;
+    EmployeeServiceImplementation employeeService;
 
     @Autowired
     private MockMvc mockMvc;

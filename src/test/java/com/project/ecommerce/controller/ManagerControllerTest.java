@@ -2,8 +2,7 @@ package com.project.ecommerce.controller;
 
 
 import com.project.ecommerce.dto.item.Item;
-import com.project.ecommerce.entity.item.ItemEntity;
-import com.project.ecommerce.service.ManagerService;
+import com.project.ecommerce.service_implementation.ManagerServiceImplementation;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -27,7 +26,7 @@ class ManagerControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    ManagerService managerService;
+    ManagerServiceImplementation managerService;
 
     @Test
     void testValidationAddItem() throws Exception {

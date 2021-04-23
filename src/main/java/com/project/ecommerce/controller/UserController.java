@@ -4,7 +4,7 @@ import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.exceptions.CartNotInitialisedException;
 import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.model.CartModel;
-import com.project.ecommerce.service.UserService;
+import com.project.ecommerce.service_implementation.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController extends InitBinderClass {
 
     @Autowired
-    UserService userService;
+    UserServiceImplementation userService;
 
     @GetMapping("/dashboard")
     public String getDashBoard(Model model,HttpServletRequest request){

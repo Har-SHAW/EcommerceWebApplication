@@ -4,7 +4,7 @@ import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.exceptions.CartNotInitialisedException;
 import com.project.ecommerce.jsp_pages.JspPages;
 import com.project.ecommerce.model.CartModel;
-import com.project.ecommerce.service.CartService;
+import com.project.ecommerce.service_implementation.CartServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 public class CartController extends InitBinderClass {
 
     @Autowired
-    CartService cartService;
+    CartServiceImplementation cartService;
 
     public static final String ITEMS="items";
 

@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.project.ecommerce.repository.RoleRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.project.ecommerce.service.AdminService;
+import com.project.ecommerce.service_implementation.AdminServiceImplementation;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ class SimpleSpringECommerceProjectApplicationTests {
 	RoleRepository roleRepository;
 
 	@Autowired
-	AdminService adminService;
+	AdminServiceImplementation adminService;
 
 	@Test
 	void shouldReturnDefaultMessage() throws Exception {

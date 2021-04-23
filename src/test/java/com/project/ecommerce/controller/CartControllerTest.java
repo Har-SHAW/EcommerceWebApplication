@@ -3,7 +3,7 @@ package com.project.ecommerce.controller;
 import com.project.ecommerce.dto.item.Item;
 import com.project.ecommerce.dto.order.OrderItem;
 import com.project.ecommerce.model.CartModel;
-import com.project.ecommerce.service.CartService;
+import com.project.ecommerce.service_implementation.CartServiceImplementation;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class CartControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    CartService cartService;
+    CartServiceImplementation cartService;
 
     CartModel getCart(){
         Item item = new Item();

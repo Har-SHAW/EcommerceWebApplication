@@ -2,63 +2,20 @@ package com.project.ecommerce.service;
 
 import com.project.ecommerce.dto.item.Item;
 import com.project.ecommerce.entity.item.ItemEntity;
-import com.project.ecommerce.repository.ItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class ManagerService {
+public interface ManagerService {
+    List<Item> getAllItems();
 
+    Item getItemById(Long id);
 
-    @Autowired
-    ItemRepository itemRepository;
+    void editItem(Item item);
 
-    public List<Item> getAllItems(){
-        List<ItemEntity> itemEntities = itemRepository.findAll();
-        List<Item> items = new ArrayList<>();
+    ItemEntity findByName(String name);
 
-        for (ItemEntity itemEntity : itemEntities){
-            items.add(new Item(itemEntity));
-        }
+    void addItem(Item item);
 
-        return items;
-    }
+    void setInStock(Long id);
 
-    public Item getItemById(Long id){
-        return new Item(itemRepository.getOne(id));
-    }
-
-    public void editItem(Item item){
-        var itemEntity = itemRepository.getOne(item.getItemId());
-        itemEntity.setItemName(item.getItemName());
-        itemEntity.setItemPrice(item.getItemPrice());
-        itemRepository.save(itemEntity);
-    }
-
-    public ItemEntity findByName(String name){
-        return itemRepository.findByItemName(name);
-    }
-
-    public void addItem(Item item){
-        var itemEntity = new ItemEntity();
-        itemEntity.setItemName(item.getItemName());
-        itemEntity.setItemPrice(item.getItemPrice());
-        itemEntity.setIsOutOfStock(false);
-        itemRepository.save(itemEntity);
-    }
-
-    public void setInStock(Long id){
-        var itemEntity = itemRepository.getOne(id);
-        itemEntity.setIsOutOfStock(false);
-        itemRepository.save(itemEntity);
-    }
-
-    public void setNoStock(Long id){
-        var itemEntity = itemRepository.getOne(id);
-        itemEntity.setIsOutOfStock(true);
-        itemRepository.save(itemEntity);
-    }
+    void setNoStock(Long id);
 }

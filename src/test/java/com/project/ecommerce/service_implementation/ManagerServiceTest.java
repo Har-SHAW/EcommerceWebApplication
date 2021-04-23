@@ -1,4 +1,4 @@
-package com.project.ecommerce.service;
+package com.project.ecommerce.service_implementation;
 
 import com.project.ecommerce.dto.item.Item;
 import com.project.ecommerce.entity.item.ItemEntity;
@@ -19,7 +19,7 @@ class ManagerServiceTest {
     ItemRepository itemRepository;
 
     @Autowired
-    ManagerService managerService;
+    ManagerServiceImplementation managerService;
 
     @Test
     void testGetAll(){

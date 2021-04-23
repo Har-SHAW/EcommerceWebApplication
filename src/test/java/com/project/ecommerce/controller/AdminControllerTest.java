@@ -1,7 +1,7 @@
 package com.project.ecommerce.controller;
 
 import com.project.ecommerce.dto.user.UserRole;
-import com.project.ecommerce.service.AdminService;
+import com.project.ecommerce.service_implementation.AdminServiceImplementation;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -27,7 +27,7 @@ class AdminControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    AdminService adminService;
+    AdminServiceImplementation adminService;
 
     @Test
     void testValidationChangeRole() throws Exception {

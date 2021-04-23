@@ -1,4 +1,4 @@
-package com.project.ecommerce.service;
+package com.project.ecommerce.service_implementation;
 
 import com.project.ecommerce.dto.user.UserSignup;
 import com.project.ecommerce.entity.user.UserEntity;
@@ -20,7 +20,7 @@ class AuthServiceTest {
     RoleRepository roleRepository;
 
     @Autowired
-    AuthService authService;
+    AuthServiceImplementation authService;
 
     @Test
     void testRegisterTheUser(){

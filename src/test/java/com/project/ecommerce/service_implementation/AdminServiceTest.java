@@ -1,4 +1,4 @@
-package com.project.ecommerce.service;
+package com.project.ecommerce.service_implementation;
 
 import com.project.ecommerce.dto.user.UserRole;
 import com.project.ecommerce.entity.user.RolesEntity;
@@ -24,7 +24,7 @@ class AdminServiceTest {
     RoleRepository roleRepository;
 
     @Autowired
-    AdminService adminService;
+    AdminServiceImplementation adminService;
 
     @Test
     void testDisable(){

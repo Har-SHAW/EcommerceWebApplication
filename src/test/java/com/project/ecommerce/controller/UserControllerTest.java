@@ -4,17 +4,14 @@ package com.project.ecommerce.controller;
 import com.project.ecommerce.dto.item.Item;
 import com.project.ecommerce.dto.order.OrderItem;
 import com.project.ecommerce.model.CartModel;
-import com.project.ecommerce.service.UserService;
-import org.hamcrest.Matchers;
+import com.project.ecommerce.service_implementation.UserServiceImplementation;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -31,7 +28,7 @@ class UserControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    UserService userService;
+    UserServiceImplementation userService;
 
     @Test
     void testPLaceOrder() throws Exception {

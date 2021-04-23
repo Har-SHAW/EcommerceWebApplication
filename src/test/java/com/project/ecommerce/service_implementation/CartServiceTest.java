@@ -1,11 +1,10 @@
-package com.project.ecommerce.service;
+package com.project.ecommerce.service_implementation;
 
 import com.project.ecommerce.dto.item.Item;
 import com.project.ecommerce.dto.order.OrderItem;
 import com.project.ecommerce.entity.item.ItemEntity;
 import com.project.ecommerce.repository.ItemRepository;
 import org.assertj.core.api.Assertions;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ class CartServiceTest {
     ItemRepository itemRepository;
 
     @Autowired
-    CartService cartService;
+    CartServiceImplementation cartService;
 
     @Test
     void testContains(){

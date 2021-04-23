@@ -3,7 +3,7 @@ package com.project.ecommerce.controller;
 import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.item.Item;
 import com.project.ecommerce.jsp_pages.JspPages;
-import com.project.ecommerce.service.ManagerService;
+import com.project.ecommerce.service_implementation.ManagerServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ import javax.validation.Valid;
 public class ManagerController extends InitBinderClass {
 
     @Autowired
-    ManagerService managerService;
+    ManagerServiceImplementation managerService;
 
 
     @GetMapping("/showItems")

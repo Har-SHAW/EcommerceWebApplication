@@ -1,4 +1,4 @@
-package com.project.ecommerce.service;
+package com.project.ecommerce.service_implementation;
 
 import com.project.ecommerce.dto.order.OrderItem;
 import com.project.ecommerce.entity.order.OrderEntity;
@@ -31,7 +31,7 @@ class UserServiceTest {
     OrderRepository orderRepository;
 
     @Autowired
-    UserService userService;
+    UserServiceImplementation userService;
 
     @Test
     void testGetUsernameFromAuth(){

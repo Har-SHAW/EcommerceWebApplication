@@ -2,7 +2,7 @@ package com.project.ecommerce.controller;
 
 import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.jsp_pages.JspPages;
-import com.project.ecommerce.service.EmployeeService;
+import com.project.ecommerce.service_implementation.EmployeeServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class EmployeeController extends InitBinderClass {
 
     @Autowired
-    EmployeeService employeeService;
+    EmployeeServiceImplementation employeeService;
 
     @GetMapping("/showOrders")
     public String showOrders(Model model){

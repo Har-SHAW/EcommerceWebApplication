@@ -3,9 +3,9 @@ package com.project.ecommerce.controller;
 import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.user.UserRole;
 import com.project.ecommerce.jsp_pages.JspPages;
-import com.project.ecommerce.service.AdminService;
-import com.project.ecommerce.service.AuthService;
-import com.project.ecommerce.service.UserService;
+import com.project.ecommerce.service_implementation.AdminServiceImplementation;
+import com.project.ecommerce.service_implementation.AuthServiceImplementation;
+import com.project.ecommerce.service_implementation.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +19,13 @@ import javax.validation.Valid;
 public class AdminController extends InitBinderClass {
 
     @Autowired
-    AdminService adminService;
+    AdminServiceImplementation adminService;
 
     @Autowired
-    AuthService authService;
+    AuthServiceImplementation authService;
 
     @Autowired
-    UserService userService;
+    UserServiceImplementation userService;
 
     private static final String USERS = "users";
     private static final String USER_ROLE = "userRole";

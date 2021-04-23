@@ -3,7 +3,7 @@ package com.project.ecommerce.controller;
 import com.project.ecommerce.binder.InitBinderClass;
 import com.project.ecommerce.dto.user.UserSignup;
 import com.project.ecommerce.jsp_pages.JspPages;
-import com.project.ecommerce.service.AuthService;
+import com.project.ecommerce.service_implementation.AuthServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ import javax.validation.Valid;
 public class AuthController extends InitBinderClass {
 
     @Autowired
-    AuthService authService;
+    AuthServiceImplementation authService;
 
     @GetMapping("/signup")
     public String registerUser(Model model){

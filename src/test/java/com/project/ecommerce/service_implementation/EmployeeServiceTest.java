@@ -1,4 +1,4 @@
-package com.project.ecommerce.service;
+package com.project.ecommerce.service_implementation;
 
 import com.project.ecommerce.repository.OrderRepository;
 import org.assertj.core.api.Assertions;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @SpringBootTest
 class EmployeeServiceTest {
     @Autowired
-    EmployeeService employeeService;
+    EmployeeServiceImplementation employeeService;
 
     @MockBean
     OrderRepository orderRepository;
